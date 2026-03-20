@@ -91,6 +91,7 @@
 
     /* 다크 모드 자동 전환 */
     @media (prefers-color-scheme: dark) {
+      
       :root {
         --cream:       #1A1714;
         --cream-mid:   #211D19;
@@ -1295,17 +1296,13 @@
     .tab-panel.active {
       display: block;
     }
-
-    /* ─────────────────────────────────────
-       RESPONSIVE — Mobile-first tuning
-    ───────────────────────────────────── */
-    /* 소형 모바일 (SE, 구형폰) */
-    @media (max-width: 360px) {
-      .wrap { padding: 0 16px; }
-      .hero-h1    { font-size: 24px; }
-      .hero-sub   { font-size: 14px; }
-      .h2         { font-size: 20px; }
-      .cta-headline { font-size: 22px; }
+        body, .h2, .hero-h1, .hero-sub, .lead, .intro-h2, .intro-body, .empathy-headline, .check-item, .empathy-footer p {
+          color: #F5F0EB !important;
+        }
+        a, .btn-primary {
+          color: #F5F0EB !important;
+        }
+        /* 필요시 다른 텍스트 요소도 추가 */
       .diff-grid  { grid-template-columns: 1fr; }
       .stat-grid  { grid-template-columns: 1fr 1fr; }
       .verify-grid { grid-template-columns: 1fr; }
