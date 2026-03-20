@@ -1,0 +1,263 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+  <title>HeartPOP — 부담 없이 만나는 프라이빗 만남 이벤트</title>
+  <link href="https://fonts.googleapis.com/css2?family=Pretendard:wght@400;700&family=Noto+Sans+KR:wght@400;700&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      --bg-main: #F8F6F3;
+      --bg-card: #FFF;
+      --bg-accent: #F5E9E3;
+      --brand: #E8695A;
+      --brand-dark: #C74F40;
+      --brand-light: #F5A77F;
+      --text-main: #2D2523;
+      --text-sub: #7A6B64;
+      --shadow: 0 4px 24px rgba(232,105,90,0.08);
+      --radius-lg: 24px;
+      --radius-md: 16px;
+      --radius-sm: 8px;
+      --font-main: 'Pretendard', 'Noto Sans KR', sans-serif;
+    }
+    body {
+      font-family: var(--font-main);
+      background: var(--bg-main);
+      color: var(--text-main);
+      margin: 0;
+      padding: 0;
+      min-height: 100vh;
+    }
+    .header-profile {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding: 48px 24px 32px;
+      background: var(--bg-card);
+      border-radius: 0 0 var(--radius-lg) var(--radius-lg);
+      box-shadow: var(--shadow);
+      margin-bottom: 24px;
+    }
+    .header-logo {
+      width: 96px;
+      height: 96px;
+      border-radius: 50%;
+      object-fit: cover;
+      box-shadow: 0 2px 12px rgba(232,105,90,0.12);
+      margin-bottom: 18px;
+      background: var(--bg-accent);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 48px;
+      color: var(--brand);
+    }
+    .header-title {
+      font-size: 2rem;
+      font-weight: 700;
+      color: var(--brand);
+      margin-bottom: 8px;
+      letter-spacing: 0.04em;
+      text-align: center;
+    }
+    .header-desc {
+      font-size: 1rem;
+      color: var(--text-sub);
+      margin-bottom: 8px;
+      text-align: center;
+    }
+    .header-link {
+      font-size: 0.95rem;
+      color: var(--brand-dark);
+      background: var(--bg-accent);
+      border-radius: var(--radius-md);
+      padding: 6px 16px;
+      text-decoration: none;
+      margin-top: 8px;
+      box-shadow: 0 2px 8px rgba(232,105,90,0.06);
+      transition: background .2s;
+    }
+    .header-link:hover { background: var(--brand-light); }
+
+    .category-bar {
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      background: var(--bg-main);
+      padding: 12px 0 8px;
+      display: flex;
+      justify-content: center;
+      gap: 10px;
+      box-shadow: 0 2px 8px rgba(232,105,90,0.04);
+    }
+    .category-btn {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 1rem;
+      font-weight: 700;
+      color: var(--brand);
+      background: var(--bg-card);
+      border: none;
+      border-radius: var(--radius-md);
+      padding: 14px 22px;
+      box-shadow: var(--shadow);
+      cursor: pointer;
+      transition: background .18s, color .18s, box-shadow .18s;
+      outline: none;
+      margin: 0;
+    }
+    .category-btn.active {
+      background: var(--brand);
+      color: #fff;
+      box-shadow: 0 4px 24px rgba(232,105,90,0.18);
+    }
+    .category-btn:active { background: var(--brand-light); }
+    .category-btn .icon {
+      font-size: 1.2em;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .section-card {
+      background: var(--bg-card);
+      border-radius: var(--radius-lg);
+      box-shadow: var(--shadow);
+      margin: 24px 16px;
+      padding: 32px 20px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 16px;
+    }
+    .section-title {
+      font-size: 1.3rem;
+      font-weight: 700;
+      color: var(--brand);
+      margin-bottom: 8px;
+      text-align: center;
+    }
+    .section-desc {
+      font-size: 1rem;
+      color: var(--text-sub);
+      text-align: center;
+      margin-bottom: 12px;
+    }
+    .section-cta {
+      display: inline-block;
+      background: var(--brand);
+      color: #fff;
+      font-size: 1rem;
+      font-weight: 700;
+      border-radius: var(--radius-md);
+      padding: 14px 28px;
+      text-decoration: none;
+      box-shadow: var(--shadow);
+      margin-top: 8px;
+      transition: background .18s;
+    }
+    .section-cta:active { background: var(--brand-dark); }
+
+    /* 카드 간격 일정하게 */
+    @media (min-width: 480px) {
+      .section-card { margin: 24px auto; max-width: 420px; }
+    }
+    @media (min-width: 768px) {
+      .header-profile { padding: 64px 32px 40px; }
+      .section-card { max-width: 520px; }
+      .category-bar { padding: 16px 0 12px; }
+    }
+    /* 부드러운 등장 애니메이션 */
+    .fade-in { opacity: 0; transform: translateY(24px); transition: opacity .5s, transform .5s; }
+    .fade-in.visible { opacity: 1; transform: translateY(0); }
+  </style>
+</head>
+<body>
+  <!-- 상단 프로필형 헤더 -->
+  <header class="header-profile">
+    <div class="header-logo">
+      <!-- 로고 이미지 없으면 이모지/텍스트 사용 -->
+      <img src="https://i.ibb.co/3y0QZyK/heartpop-logo.png" alt="HeartPOP 로고" style="width:100%;height:100%;border-radius:50%;object-fit:cover;" onerror="this.style.display='none';this.parentNode.innerHTML='💖';">
+    </div>
+    <div class="header-title">HeartPOP</div>
+    <div class="header-desc">부담 없이 만나는 프라이빗 만남 이벤트</div>
+    <a class="header-link" href="https://form.naver.com/response/K3ryMyKyBwcO0rC3GW1nCQ" target="_blank">네이버 신청 폼 바로가기</a>
+  </header>
+
+  <!-- 카테고리 버튼 영역 -->
+  <nav class="category-bar" id="categoryBar">
+    <button class="category-btn active" data-target="about"><span class="icon">💡</span>소개</button>
+    <button class="category-btn" data-target="apply"><span class="icon">📝</span>신청하기</button>
+    <button class="category-btn" data-target="review"><span class="icon">🌟</span>후기</button>
+    <button class="category-btn" data-target="faq"><span class="icon">❓</span>FAQ</button>
+  </nav>
+
+  <!-- 섹션 카드 구조 -->
+  <section class="section-card fade-in" id="about">
+    <div class="section-title">HeartPOP란?</div>
+    <div class="section-desc">커튼룸에서 전원 1:1 대화, 공개 발표 없는 안전한 만남.<br>소개팅 부담 없이 자연스럽게.<br>부천 로테이션 만남 이벤트.</div>
+    <a class="section-cta" href="#apply">신청하기</a>
+  </section>
+
+  <section class="section-card fade-in" id="apply">
+    <div class="section-title">신청 안내</div>
+    <div class="section-desc">성비 1:1 보장 · 신청 후 개별 안내 · 정원 마감 시 조기 종료<br>참가 연령: 20~35세<br>참가비: 남성 2만원, 여성 1만원</div>
+    <a class="section-cta" href="https://form.naver.com/response/K3ryMyKyBwcO0rC3GW1nCQ" target="_blank">네이버 폼으로 신청</a>
+  </section>
+
+  <section class="section-card fade-in" id="review">
+    <div class="section-title">참가 후기</div>
+    <div class="section-desc">"부담 없이 대화할 수 있어서 좋았어요!"<br>"진짜 자연스럽게 만남이 이어졌어요."<br>"운영진이 세심하게 케어해줘서 안심됐어요."</div>
+  </section>
+
+  <section class="section-card fade-in" id="faq">
+    <div class="section-title">FAQ</div>
+    <div class="section-desc">
+      <b>Q. 신청 후 바로 만날 수 있나요?</b><br>
+      A. 신청 후 개별 안내를 드립니다.<br><br>
+      <b>Q. 참가비 결제는 어떻게 하나요?</b><br>
+      A. 현장 결제 또는 사전 안내에 따라 진행됩니다.<br><br>
+      <b>Q. 성비는 어떻게 맞추나요?</b><br>
+      A. 정원 마감 시 성비 1:1로 조정합니다.
+    </div>
+  </section>
+
+  <script>
+    // 등장 애니메이션
+    document.querySelectorAll('.fade-in').forEach(function(el, i) {
+      setTimeout(function() { el.classList.add('visible'); }, 200 + i * 120);
+    });
+
+    // 카테고리 버튼 클릭 시 섹션 이동 및 active 처리
+    const btns = document.querySelectorAll('.category-btn');
+    btns.forEach(btn => {
+      btn.addEventListener('click', function() {
+        btns.forEach(b => b.classList.remove('active'));
+        btn.classList.add('active');
+        const target = btn.getAttribute('data-target');
+        const section = document.getElementById(target);
+        if (section) {
+          section.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        }
+      });
+    });
+
+    // 섹션별 active 처리 (스크롤 감지)
+    window.addEventListener('scroll', function() {
+      const sections = ['about','apply','review','faq'];
+      let current = sections[0];
+      const scrollY = window.scrollY + 80;
+      sections.forEach(id => {
+        const el = document.getElementById(id);
+        if (el && el.offsetTop <= scrollY) current = id;
+      });
+      btns.forEach(btn => {
+        btn.classList.toggle('active', btn.getAttribute('data-target') === current);
+      });
+    });
+  </script>
+</body>
+</html>
