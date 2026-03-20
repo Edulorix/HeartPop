@@ -937,7 +937,14 @@
       padding: 40px 24px 80px;
     }
 
-    .ft-inner { max-width: 480px; margin: 0 auto; }
+    .ft-inner {
+      max-width: 480px;
+      margin: 0 auto;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+    }
 
     .ft-brand {
       font-family: var(--serif);
@@ -955,7 +962,7 @@
     }
 
     .ft-links {
-      display: flex; flex-direction: column; gap: 10px;
+      display: flex; flex-direction: column; align-items: center; gap: 10px;
       margin-bottom: 28px;
     }
 
@@ -978,6 +985,7 @@
       font-size: 11px;
       color: rgba(253,250,246,.22);
       line-height: 1.85;
+      text-align: center;
     }
 
     /* ── [수정] 로고 심볼 히어로 → 풀 와이드 배너형 ── */
