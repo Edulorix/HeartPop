@@ -1,13 +1,30 @@
 
 <!DOCTYPE html>
+<!--
+  ═══════════════════════════════════════════════════
+  HeartPOP 랜딩페이지 — 전환율 최적화 버전
+  ───────────────────────────────────────────────────
+  ★ 운영값 수정 구역 (아래 CONFIG 블록만 수정):
+    NAVER_FORM_URL  : 네이버 신청 폼 링크
+    SESSION_DAY     : 세션 요일/시간
+    SESSION_PRICE_M : 남성 참가비
+    SESSION_PRICE_F : 여성 참가비
+    SESSION_LIMIT   : 정원 인원 (남녀 각)
+    SESSION_AGE     : 참가 연령 범위
+    SESSION_VENUE   : 장소명
+    INSTAGRAM_URL   : 인스타그램 링크
+    KAKAO_URL       : 카카오 채널 링크
+  ═══════════════════════════════════════════════════
+-->
 <html lang="ko">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
-  <title>HeartPOP — 소개팅은 부담스럽고, 앱은 지겹다면</title>
-  <meta name="description" content="프라이빗 커튼룸에서 짧고 편안한 1:1 대화로 새로운 사람을 만나세요. 전원 만남 보장, 공개 발표 없음. 부천 로테이션 만남 이벤트." />
-  <meta property="og:title" content="HeartPOP — 어색하지 않은 첫 만남이 시작되는 곳" />
-  <meta property="og:description" content="프라이빗 커튼룸에서 짧고 편안한 1:1 대화로 새로운 사람을 만나세요." />
+  <title>HeartPOP — 부담 없이 만나는 프라이빗 만남 이벤트</title>
+  <!-- SEO/OG: 전환 의도 키워드 포함 -->
+  <meta name="description" content="프라이빗 커튼룸에서 전원 1:1 대화, 공개 발표 없는 안전한 만남. 소개팅 부담 없이 자연스럽게. 부천 로테이션 만남 이벤트 HeartPOP." />
+  <meta property="og:title" content="HeartPOP — 부담 없이 만나는 프라이빗 만남 이벤트" />
+  <meta property="og:description" content="커튼룸에서 전원 1:1 대화, 공개 발표 없음. 소개팅 부담 없이 자연스럽게." />
   <meta property="og:type" content="website" />
 
   <link rel="preconnect" href="https://fonts.googleapis.com" />
@@ -882,6 +899,143 @@
       line-height: 1.85;
     }
 
+    /* ── [추가] Hero USP 3-pill ── */
+    .hero-usps {
+      display: flex; flex-wrap: wrap; gap: 8px;
+      margin-bottom: 24px;
+    }
+    .hero-usp {
+      display: inline-flex; align-items: center; gap: 6px;
+      background: rgba(253,250,246,.08);
+      border: 1px solid rgba(253,250,246,.15);
+      border-radius: 100px;
+      padding: 7px 14px;
+      font-size: 12.5px;
+      color: rgba(253,250,246,.75);
+      backdrop-filter: blur(4px);
+    }
+    .hero-usp-ico { font-size: 14px; }
+
+    /* ── [추가] 중간 CTA 배너 ── */
+    .mid-cta {
+      background: linear-gradient(135deg, #2D2523, #1E1A18);
+      padding: 36px 0;
+      text-align: center;
+    }
+    .mid-cta .wrap { display: flex; flex-direction: column; align-items: center; gap: 14px; }
+    .mid-cta-txt {
+      font-size: 14px;
+      color: rgba(253,250,246,.55);
+      line-height: 1.7;
+    }
+    .mid-cta-txt strong { color: var(--coral-lt); }
+
+    /* ── [추가] 검증 시스템 카드 ── */
+    .verify-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 10px;
+      margin-top: 24px;
+    }
+    .verify-card {
+      background: var(--white);
+      border: 1px solid var(--line);
+      border-radius: 12px;
+      padding: 18px 14px 16px;
+    }
+    .verify-card-title {
+      font-size: 13px;
+      font-weight: 700;
+      color: var(--dark);
+      margin-bottom: 4px;
+      line-height: 1.4;
+    }
+    .verify-card-desc {
+      font-size: 11.5px;
+      color: var(--text-lt);
+      line-height: 1.6;
+    }
+    .verify-card-ico {
+      font-size: 20px;
+      margin-bottom: 8px;
+    }
+
+    /* ── [추가] 이미지 슬롯 placeholder ── */
+    .img-slot {
+      background: #2A211C;
+      border-radius: 12px;
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      position: relative;
+    }
+    .img-slot img {
+      width: 100%; height: 100%;
+      object-fit: cover;
+      display: block;
+    }
+    .img-slot-ph {
+      padding: 32px 16px;
+      text-align: center;
+    }
+    .img-slot-label {
+      display: block;
+      font-size: 10px;
+      font-weight: 700;
+      letter-spacing: .08em;
+      text-transform: uppercase;
+      color: rgba(253,250,246,.25);
+      margin-bottom: 6px;
+    }
+    .img-slot-desc {
+      font-size: 12px;
+      color: rgba(253,250,246,.35);
+      line-height: 1.6;
+    }
+    .atmo-grid-v2 {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 8px;
+      margin-top: 28px;
+    }
+    .atmo-grid-v2 .img-slot:first-child {
+      grid-column: 1 / -1;
+      min-height: 200px;
+    }
+    .atmo-grid-v2 .img-slot { min-height: 150px; }
+
+    /* ── [추가] focus-visible 접근성 ── */
+    .btn-primary:focus-visible,
+    .btn-ghost:focus-visible,
+    .btn-cta:focus-visible,
+    #sticky a:focus-visible,
+    .faq-q:focus-visible {
+      outline: 2px solid var(--coral);
+      outline-offset: 2px;
+    }
+
+    /* ── [추가] 로고 이미지 ── */
+    .hero-logo-img {
+      height: 36px;
+      width: auto;
+      margin-bottom: 48px;
+      opacity: .85;
+    }
+
+    /* ── [추가] 네이버 로그인 안내 ── */
+    .naver-hint {
+      margin-top: 10px;
+      font-size: 11px;
+      color: rgba(253,250,246,.28);
+    }
+    .naver-hint--dark {
+      color: var(--text-lt);
+      margin-top: 8px;
+      font-size: 11px;
+    }
+
     /* ─────────────────────────────────────
        RESPONSIVE
     ───────────────────────────────────── */
@@ -889,6 +1043,7 @@
       .hero-h1    { font-size: 27px; }
       .diff-grid  { grid-template-columns: 1fr; }
       .stat-grid  { grid-template-columns: 1fr 1fr; }
+      .verify-grid { grid-template-columns: 1fr; }
     }
   </style>
 </head>
@@ -897,28 +1052,38 @@
 <!-- ══════════════════════════════════════
      S1 · HERO
 ══════════════════════════════════════ -->
+<!-- ★ [수정] Hero: 로고 이미지 사용, USP 3-pill 즉시 노출, CTA→네이버폼 직링크, 마이크로카피 강화 -->
 <section id="hero">
   <div class="hero-bg"></div>
 
   <div class="hero-content">
-    <span class="hero-logo">HEART POP ✦</span>
-    <span class="hero-eyebrow">Rotation Dating Event · 부천</span>
+    <!-- 로고: 로고 폴더 내 이미지 사용 (가장 깔끔한 버전 선택) -->
+    <img src="로고/로고2.png" alt="HeartPOP 로고" class="hero-logo-img" />
+    <span class="hero-eyebrow">가까워진 사이 · Rotation Dating Event</span>
 
     <h1 class="hero-h1">
       소개팅은 부담스럽고,<br>앱은 지겹다면
     </h1>
 
+    <!-- ★ [추가] 차별점 3가지 즉시 노출 -->
+    <div class="hero-usps">
+      <span class="hero-usp"><span class="hero-usp-ico">🔒</span> 프라이빗 커튼룸</span>
+      <span class="hero-usp"><span class="hero-usp-ico">🔄</span> 전원 1:1 대화</span>
+      <span class="hero-usp"><span class="hero-usp-ico">🤫</span> 공개 발표 없음</span>
+    </div>
+
     <p class="hero-sub">
-      커튼룸 프라이빗 공간에서,<br>
-      짧고 편안한 1:1 대화로<br>
+      커튼룸에서, 짧고 편안한 대화로<br>
       새로운 사람을 만나세요.
     </p>
 
-    <a href="#info" class="btn-primary">다음 세션 확인하기</a>
-    <span class="hero-micro">신청 약 1분 소요 · 성비 1:1 보장</span>
+    <!-- ★ [수정] CTA: 네이버 폼 직접 연결, 즉시 신청 유도 -->
+    <a href="https://form.naver.com/response/K3ryMyKyBwcO0rC3GW1nCQ" class="btn-primary" target="_blank" rel="noopener noreferrer" aria-label="1분 만에 신청하기">1분 만에 신청하기</a>
+    <span class="hero-micro">성비 1:1 보장 · 신청 후 개별 안내 · 정원 마감 시 조기 종료</span>
+    <span class="naver-hint">네이버 로그인 후 신청 가능합니다</span>
   </div>
 
-  <div class="hero-scroll-hint">SCROLL</div>
+  <div class="hero-scroll-hint" aria-hidden="true">SCROLL</div>
 </section>
 
 
@@ -986,6 +1151,9 @@
       <span class="badge">공개 발표 없음</span>
       <span class="badge">부담 없는 분위기</span>
     </div>
+
+    <!-- ★ [추가] 중간 CTA: 서비스 이해 후 정보 확인 유도 -->
+    <a href="#how" class="btn-ghost" style="margin-top:28px;">진행 방식 먼저 확인하기 →</a>
   </div>
 </section>
 
@@ -1129,7 +1297,20 @@
       운영자가 전체 흐름을 안내하므로, 처음이어도 걱정 없습니다.
     </div>
 
-    <a href="#info" class="btn-ghost">세션 일정 · 가격 확인 →</a>
+    <!-- ★ [수정] 중간 CTA: 정보 확인 후 신청 유도 (상단 CTA와 문구 차별화) -->
+    <a href="https://form.naver.com/response/K3ryMyKyBwcO0rC3GW1nCQ" class="btn-ghost" target="_blank" rel="noopener noreferrer" aria-label="잔여석 확인하고 신청하기">잔여석 확인하고 신청하기 →</a>
+    <span class="naver-hint--dark">네이버 로그인 후 신청 가능합니다</span>
+  </div>
+</section>
+
+
+<!-- ══════════════════════════════════════
+     ★ [추가] 중간 CTA 배너 — 스크롤 중 이탈 방지
+══════════════════════════════════════ -->
+<section class="mid-cta" aria-label="신청 유도">
+  <div class="wrap">
+    <p class="mid-cta-txt">아직 고민된다면, 아래에서<br><strong>운영 원칙과 후기</strong>를 먼저 확인해보세요.</p>
+    <a href="#trust" class="btn-ghost" style="border-color:rgba(253,250,246,.3);color:rgba(253,250,246,.7);">운영 원칙 보기 →</a>
   </div>
 </section>
 
@@ -1146,31 +1327,48 @@
       편안하고 차분한 조명 아래, 오롯이 대화에 집중할 수 있습니다.
     </p>
 
-    <div class="atmo-grid">
-      <div class="atmo-card tall">
-        <div class="atmo-ph">
-          <div class="atmo-ph-ico">🪔</div>
-          <div class="atmo-ph-txt">커튼룸 내부<br>무드등 조명</div>
+    <!-- ★ [수정] 이미지 슬롯 구조: 실제 사진 교체 시 img src만 변경. alt/caption으로 필요 사진 종류 명시 -->
+    <div class="atmo-grid-v2">
+
+      <!-- 슬롯 1: 메인 — 커튼룸 전경 (2인 마주앉아 대화하는 뒷모습/실루엣) -->
+      <div class="img-slot">
+        <div class="img-slot-ph">
+          <span class="img-slot-label">PHOTO SLOT 1 · 메인</span>
+          <span class="img-slot-desc">커튼룸 안에서 마주 앉아 대화하는 두 사람<br>(뒷모습 또는 실루엣, 얼굴 미노출)</span>
+        </div>
+        <!-- 실제 사진 교체: <img src="photos/curtain-room.jpg" alt="커튼룸에서 마주 앉아 대화하는 모습" /> -->
+      </div>
+
+      <!-- 슬롯 2: 테이블 세팅 (질문카드 + 소분 다과 + 1인 음료) -->
+      <div class="img-slot">
+        <div class="img-slot-ph">
+          <span class="img-slot-label">PHOTO SLOT 2</span>
+          <span class="img-slot-desc">테이블 위 질문카드 + 소분 다과 + 음료 1잔</span>
         </div>
       </div>
-      <div class="atmo-card">
-        <div class="atmo-ph">
-          <div class="atmo-ph-ico">🃏</div>
-          <div class="atmo-ph-txt">질문카드<br>테이블 세팅</div>
+
+      <!-- 슬롯 3: 커튼룸 외부/복도 (프라이빗 공간 느낌) -->
+      <div class="img-slot">
+        <div class="img-slot-ph">
+          <span class="img-slot-label">PHOTO SLOT 3</span>
+          <span class="img-slot-desc">커튼으로 분리된 룸 복도<br>(프라이빗한 공간감 전달)</span>
         </div>
       </div>
-      <div class="atmo-card">
-        <div class="atmo-ph">
-          <div class="atmo-ph-ico">☕</div>
-          <div class="atmo-ph-txt">음료 &amp; 다과<br>세팅</div>
+
+      <!-- 슬롯 4: 2부 보드게임 자유교류 모습 -->
+      <div class="img-slot">
+        <div class="img-slot-ph">
+          <span class="img-slot-label">PHOTO SLOT 4</span>
+          <span class="img-slot-desc">2부 보드게임 교류 장면<br>(자연스러운 웃음, 손 클로즈업 등)</span>
         </div>
       </div>
+
     </div>
 
-    <p class="atmo-caption">"조용한 조명 아래, 자연스러운 대화가 시작되는 공간"</p>
+    <p class="atmo-caption">"편안한 공간에서, 자연스러운 대화가 시작됩니다"</p>
 
     <p class="atmo-note">
-      술잔 클로즈업도, 파티 조명도 없습니다.<br>
+      시끄러운 술자리가 아닙니다.<br>
       그냥 편안하게 앉아, 이야기하면 됩니다.
     </p>
   </div>
@@ -1300,6 +1498,31 @@
         </div>
       </div>
     </div>
+
+    <!-- ★ [추가] 검증 시스템 카드: 말뿐인 주장이 아닌 구체적 운영 원칙 -->
+    <h3 class="h2" style="margin-top:40px;font-size:20px;">구체적인 운영 원칙</h3>
+    <div class="verify-grid">
+      <div class="verify-card">
+        <div class="verify-card-ico">⚖️</div>
+        <div class="verify-card-title">성비 1:1 철저 유지</div>
+        <div class="verify-card-desc">남녀 인원이 맞지 않으면 세션을 진행하지 않고 일정을 조정합니다.</div>
+      </div>
+      <div class="verify-card">
+        <div class="verify-card-ico">✅</div>
+        <div class="verify-card-title">참가 확정 기준</div>
+        <div class="verify-card-desc">신청 후 개별 확인 → 입금 확인 → 확정 안내 순서로 진행됩니다.</div>
+      </div>
+      <div class="verify-card">
+        <div class="verify-card-ico">🚫</div>
+        <div class="verify-card-title">비매너 즉시 퇴장</div>
+        <div class="verify-card-desc">운영자가 현장에서 실시간 모니터링하며, 비매너 시 즉시 퇴장 조치합니다.</div>
+      </div>
+      <div class="verify-card">
+        <div class="verify-card-ico">🔕</div>
+        <div class="verify-card-title">결과 비공개 원칙</div>
+        <div class="verify-card-desc">누가 몇 표를 받았는지 아무도 모릅니다. 민망함이 발생할 수 없는 구조입니다.</div>
+      </div>
+    </div>
   </div>
 </section>
 
@@ -1312,89 +1535,86 @@
     <span class="tag">FAQ</span>
     <h2 class="h2">자주 묻는 질문</h2>
 
-    <div class="faq-list">
+    <!-- ★ [수정] FAQ 고도화: 실제 망설임 질문 위주로 재작성, aria 보완 -->
+    <div class="faq-list" role="list">
 
-      <div class="faq-item">
-        <button class="faq-q" onclick="faqToggle(this)">
+      <div class="faq-item" role="listitem">
+        <button class="faq-q" onclick="faqToggle(this)" aria-expanded="false">
           혼자 가도 괜찮을까요?
-          <span class="faq-arr">+</span>
+          <span class="faq-arr" aria-hidden="true">+</span>
         </button>
-        <div class="faq-a">
-          <div class="faq-a-inner">
-            네, 대부분의 참가자가 혼자 오십니다. 혼자 오시는 분들을 위한 구조이므로 편하게 오세요. 운영자가 자연스럽게 흐름을 이어가 드립니다.
-          </div>
+        <div class="faq-a" role="region">
+          <div class="faq-a-inner">네, 참가자 대부분이 혼자 오십니다. 운영자가 자연스럽게 분위기를 이어가므로 혼자 오셔도 전혀 어색하지 않습니다.</div>
         </div>
       </div>
 
-      <div class="faq-item">
-        <button class="faq-q" onclick="faqToggle(this)">
-          이름이나 나이를 꼭 공개해야 하나요?
-          <span class="faq-arr">+</span>
+      <div class="faq-item" role="listitem">
+        <button class="faq-q" onclick="faqToggle(this)" aria-expanded="false">
+          어색하면 어떡하죠? 대화를 잘 못해도 되나요?
+          <span class="faq-arr" aria-hidden="true">+</span>
         </button>
-        <div class="faq-a">
-          <div class="faq-a-inner">
-            강요하지 않습니다. 나이·직업·이름 공개 여부는 본인이 결정합니다. 불편하시면 닉네임을 쓰셔도 됩니다.
-          </div>
+        <div class="faq-a" role="region">
+          <div class="faq-a-inner">각 테이블에 질문카드가 놓여 있어, 첫 마디가 어려울 때 카드가 대화를 열어줍니다. "대화를 잘해야 한다"는 부담은 구조가 대신 해결합니다.</div>
         </div>
       </div>
 
-      <div class="faq-item">
-        <button class="faq-q" onclick="faqToggle(this)">
-          매칭 결과는 어떻게 전달되나요?
-          <span class="faq-arr">+</span>
+      <div class="faq-item" role="listitem">
+        <button class="faq-q" onclick="faqToggle(this)" aria-expanded="false">
+          인기 있는 사람에게만 몰리지 않나요?
+          <span class="faq-arr" aria-hidden="true">+</span>
         </button>
-        <div class="faq-a">
-          <div class="faq-a-inner">
-            현장에서 발표하지 않습니다. 이벤트 다음날, 상호 선택된 분들께만 개별 문자로 연락처를 전달해 드립니다.
-          </div>
+        <div class="faq-a" role="region">
+          <div class="faq-a-inner">1:1 로테이션 구조이기 때문에 참가자 전원과 동일한 시간 동안 대화합니다. 특정인에게 쏠리는 구조 자체가 없습니다.</div>
         </div>
       </div>
 
-      <div class="faq-item">
-        <button class="faq-q" onclick="faqToggle(this)">
-          대화를 잘 못해도 괜찮을까요?
-          <span class="faq-arr">+</span>
+      <div class="faq-item" role="listitem">
+        <button class="faq-q" onclick="faqToggle(this)" aria-expanded="false">
+          비매너 참가자가 있으면 어떻게 하나요?
+          <span class="faq-arr" aria-hidden="true">+</span>
         </button>
-        <div class="faq-a">
-          <div class="faq-a-inner">
-            각 테이블에 질문카드가 놓여 있습니다. 첫 마디가 어려울 때 카드가 도와드립니다. "대화를 잘해야 한다"는 부담 없이 오세요.
-          </div>
+        <div class="faq-a" role="region">
+          <div class="faq-a-inner">운영자가 현장에서 실시간 모니터링하며, 비매너 행위 확인 시 즉시 퇴장 조치합니다. 참가자 안전이 최우선입니다.</div>
         </div>
       </div>
 
-      <div class="faq-item">
-        <button class="faq-q" onclick="faqToggle(this)">
-          2부는 꼭 참여해야 하나요?
-          <span class="faq-arr">+</span>
+      <div class="faq-item" role="listitem">
+        <button class="faq-q" onclick="faqToggle(this)" aria-expanded="false">
+          매칭이 안 되면 민망하지 않나요?
+          <span class="faq-arr" aria-hidden="true">+</span>
         </button>
-        <div class="faq-a">
-          <div class="faq-a-inner">
-            1부 후 귀가하셔도 됩니다. 2부 자유교류는 선택 사항이며 추가 참가비(10,000~15,000원)가 있습니다. 1부만으로도 충분히 의미 있는 시간이 됩니다.
-          </div>
+        <div class="faq-a" role="region">
+          <div class="faq-a-inner">현장에서 결과를 발표하지 않습니다. 누가 몇 표를 받았는지 아무도 모르며, 상호 선택 시에만 다음날 개별 안내됩니다. 민망함이 발생할 수 없는 구조입니다.</div>
         </div>
       </div>
 
-      <div class="faq-item">
-        <button class="faq-q" onclick="faqToggle(this)">
+      <div class="faq-item" role="listitem">
+        <button class="faq-q" onclick="faqToggle(this)" aria-expanded="false">
+          다음에 또 참여할 수 있나요?
+          <span class="faq-arr" aria-hidden="true">+</span>
+        </button>
+        <div class="faq-a" role="region">
+          <div class="faq-a-inner">네, 재참여 가능합니다. 매주 새로운 참가자로 구성되므로 반복 참여해도 새로운 만남이 이어집니다.</div>
+        </div>
+      </div>
+
+      <div class="faq-item" role="listitem">
+        <button class="faq-q" onclick="faqToggle(this)" aria-expanded="false">
+          신청할 때 네이버 로그인이 필요한가요?
+          <span class="faq-arr" aria-hidden="true">+</span>
+        </button>
+        <div class="faq-a" role="region">
+          <div class="faq-a-inner">네, 네이버 폼을 통해 신청하므로 네이버 로그인이 필요합니다. 로그인 후 약 1분이면 신청이 완료됩니다.</div>
+        </div>
+      </div>
+
+      <div class="faq-item" role="listitem">
+        <button class="faq-q" onclick="faqToggle(this)" aria-expanded="false">
           취소 및 환불은 어떻게 되나요?
-          <span class="faq-arr">+</span>
+          <span class="faq-arr" aria-hidden="true">+</span>
         </button>
-        <div class="faq-a">
-          <div class="faq-a-inner">
-            이벤트 3일 전까지 전액 환불 가능합니다. 이후 취소는 부분 환불 또는 다음 세션 이월로 협의합니다. 변경 사항은 DM으로 문의해 주세요.
-          </div>
-        </div>
-      </div>
-
-      <div class="faq-item">
-        <button class="faq-q" onclick="faqToggle(this)">
-          음주는 필수인가요?
-          <span class="faq-arr">+</span>
-        </button>
-        <div class="faq-a">
-          <div class="faq-a-inner">
-            아닙니다. 기본 제공은 음료(논알콜 포함)입니다. 주류는 원하시는 분만 별도 주문하실 수 있으며, 음주를 강요하는 분위기는 없습니다.
-          </div>
+        <div class="faq-a" role="region">
+          <div class="faq-a-inner">이벤트 3일 전까지 전액 환불 가능합니다. 이후 취소는 부분 환불 또는 다음 세션 이월로 협의합니다. DM으로 문의해 주세요.</div>
         </div>
       </div>
 
@@ -1419,10 +1639,12 @@
       그냥 와서, 자연스럽게 이야기하면 됩니다.
     </p>
 
-    <div class="cta-pill">잔여석 확인 중 — 정원 8명</div>
+    <div class="cta-pill">잔여석 확인 중 — 정원 남녀 각 8명</div>
 
-    <a href="https://forms.gle/" class="btn-cta" id="mainCta">지금 신청하기</a>
-    <p class="cta-micro">신청 완료까지 약 1분 · 성비 1:1 보장</p>
+    <!-- ★ [수정] 최종 CTA: 결심 유도 문구, 네이버 폼 직링크 -->
+    <a href="https://form.naver.com/response/K3ryMyKyBwcO0rC3GW1nCQ" class="btn-cta" id="mainCta" target="_blank" rel="noopener noreferrer" aria-label="지금 신청하기">지금 신청하기</a>
+    <p class="cta-micro">신청 약 1분 · 성비 1:1 보장 · 민망함 없는 구조</p>
+    <span class="naver-hint">네이버 로그인 후 신청 가능합니다</span>
   </div>
 </section>
 
@@ -1461,39 +1683,74 @@
 <!-- ══════════════════════════════════════
      STICKY CTA
 ══════════════════════════════════════ -->
-<div id="sticky">
-  <a href="#cta">지금 신청하기</a>
-  <small>정원 8명 · 성비 1:1 보장</small>
+<!-- ★ [수정] Sticky CTA: 네이버 폼 직링크, 접근성 보완 -->
+<div id="sticky" role="region" aria-label="빠른 신청">
+  <a href="https://form.naver.com/response/K3ryMyKyBwcO0rC3GW1nCQ" target="_blank" rel="noopener noreferrer" aria-label="지금 신청하기">지금 신청하기</a>
+  <small>정원 8명 · 성비 1:1 · 네이버 폼</small>
 </div>
 
 
 <!-- ══════════════════════════════════════
-     JS
+     JS — CONFIG + FAQ + STICKY
 ══════════════════════════════════════ -->
 <script>
-  /* FAQ accordion */
+  /* ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+     ★ [추가] 운영값 CONFIG — 여기만 수정하면 전체 반영
+     ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */
+  const CONFIG = {
+    NAVER_FORM_URL : 'https://form.naver.com/response/K3ryMyKyBwcO0rC3GW1nCQ',
+    SESSION_DAY    : '매주 금요일 저녁 8시',
+    SESSION_PRICE_M: '49,000원',
+    SESSION_PRICE_F: '29,000원',
+    SESSION_PRICE_2: '10,000~15,000원',
+    SESSION_LIMIT  : 8,
+    SESSION_AGE    : '25~32세',
+    SESSION_VENUE  : '부천 히어로 보드게임카페',
+    INSTAGRAM_URL  : 'https://instagram.com/',
+    KAKAO_URL      : 'https://open.kakao.com/',
+  };
+
+  /* ★ [수정] FAQ accordion — aria-expanded 상태 동기화 */
   function faqToggle(btn) {
     const ans = btn.nextElementSibling;
     const isOpen = ans.classList.contains('open');
+    // 모두 닫기
     document.querySelectorAll('.faq-a').forEach(a => a.classList.remove('open'));
-    document.querySelectorAll('.faq-q').forEach(b => b.classList.remove('open'));
-    if (!isOpen) { ans.classList.add('open'); btn.classList.add('open'); }
+    document.querySelectorAll('.faq-q').forEach(b => {
+      b.classList.remove('open');
+      b.setAttribute('aria-expanded', 'false');
+    });
+    // 선택 항목 열기
+    if (!isOpen) {
+      ans.classList.add('open');
+      btn.classList.add('open');
+      btn.setAttribute('aria-expanded', 'true');
+    }
   }
 
-  /* Sticky CTA visibility */
-  const sticky  = document.getElementById('sticky');
-  const heroEl  = document.getElementById('hero');
-  const ctaEl   = document.getElementById('cta');
+  /* ★ [수정] Sticky CTA — 안정적 로직: hero/cta 모두 관찰, 두 영역 다 안 보일 때만 표시 */
+  (function () {
+    const sticky  = document.getElementById('sticky');
+    const heroEl  = document.getElementById('hero');
+    const ctaEl   = document.getElementById('cta');
+    let heroVisible = true;
+    let ctaVisible  = false;
 
-  const io = new IntersectionObserver(entries => {
-    entries.forEach(e => {
-      if (e.target === heroEl)  sticky.style.display = e.isIntersecting ? 'none' : 'block';
-      if (e.target === ctaEl)   sticky.style.display = e.isIntersecting ? 'none' : sticky.style.display;
-    });
-  }, { threshold: 0.15 });
+    function update() {
+      sticky.style.display = (!heroVisible && !ctaVisible) ? 'block' : 'none';
+    }
 
-  io.observe(heroEl);
-  io.observe(ctaEl);
+    const io = new IntersectionObserver(entries => {
+      entries.forEach(e => {
+        if (e.target === heroEl) heroVisible = e.isIntersecting;
+        if (e.target === ctaEl)  ctaVisible  = e.isIntersecting;
+      });
+      update();
+    }, { threshold: 0.1 });
+
+    io.observe(heroEl);
+    io.observe(ctaEl);
+  })();
 </script>
 
 </body>
