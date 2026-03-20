@@ -66,6 +66,7 @@
       scroll-behavior: smooth;
       -webkit-text-size-adjust: 100%;
       text-size-adjust: 100%;
+      scroll-padding-top: 0;
     }
 
     body {
@@ -979,29 +980,32 @@
       line-height: 1.85;
     }
 
-    /* ── [수정] 로고 심볼 히어로 ── */
+    /* ── [수정] 로고 심볼 히어로 → 풀 와이드 배너형 ── */
     .hero-brand {
       display: flex;
       flex-direction: column;
       align-items: center;
       text-align: center;
-      margin-bottom: 36px;
+      width: 100%;
+      margin-bottom: 28px;
     }
     .hero-logo-symbol {
-      width: 160px;
-      height: 160px;
-      border-radius: 50%;
+      width: 100%;
+      max-width: 360px;
+      height: auto;
+      aspect-ratio: 1 / 1;
+      border-radius: 20px;
       object-fit: cover;
       margin-bottom: 20px;
       box-shadow:
-        0 0 0 4px rgba(232,105,90,.20),
-        0 0 60px rgba(232,105,90,.15),
-        0 8px 40px rgba(0,0,0,.40);
+        0 0 0 1px rgba(232,105,90,.12),
+        0 12px 48px rgba(0,0,0,.50),
+        0 0 80px rgba(232,105,90,.08);
       animation: logo-glow 4s ease-in-out infinite alternate;
     }
     @keyframes logo-glow {
-      0%   { box-shadow: 0 0 0 4px rgba(232,105,90,.20), 0 0 40px rgba(232,105,90,.10), 0 8px 40px rgba(0,0,0,.40); }
-      100% { box-shadow: 0 0 0 6px rgba(232,105,90,.30), 0 0 80px rgba(232,105,90,.18), 0 8px 40px rgba(0,0,0,.40); }
+      0%   { box-shadow: 0 0 0 1px rgba(232,105,90,.12), 0 12px 48px rgba(0,0,0,.50), 0 0 60px rgba(232,105,90,.06); }
+      100% { box-shadow: 0 0 0 2px rgba(232,105,90,.20), 0 12px 48px rgba(0,0,0,.50), 0 0 100px rgba(232,105,90,.12); }
     }
     .hero-brand-name {
       font-family: var(--serif);
@@ -1232,6 +1236,59 @@
     }
 
     /* ─────────────────────────────────────
+       TAB NAVIGATION — 모바일 카테고리 UI
+    ───────────────────────────────────── */
+    .tab-nav-wrap {
+      position: sticky;
+      top: 0;
+      z-index: 150;
+      background: var(--cream);
+      border-bottom: 1px solid var(--line);
+      padding: 0;
+      overflow: hidden;
+    }
+    .tab-nav {
+      display: flex;
+      overflow-x: auto;
+      -webkit-overflow-scrolling: touch;
+      scrollbar-width: none;
+      gap: 0;
+      max-width: 720px;
+      margin: 0 auto;
+    }
+    .tab-nav::-webkit-scrollbar { display: none; }
+
+    .tab-btn {
+      flex: 1 0 auto;
+      min-width: 0;
+      padding: 14px 16px;
+      background: none;
+      border: none;
+      border-bottom: 2.5px solid transparent;
+      cursor: pointer;
+      font-family: var(--sans);
+      font-size: 13.5px;
+      font-weight: 500;
+      color: var(--text-lt);
+      white-space: nowrap;
+      letter-spacing: -0.01em;
+      transition: color .2s, border-color .2s;
+      -webkit-tap-highlight-color: transparent;
+    }
+    .tab-btn.active {
+      color: var(--coral);
+      font-weight: 700;
+      border-bottom-color: var(--coral);
+    }
+
+    .tab-panel {
+      display: none;
+    }
+    .tab-panel.active {
+      display: block;
+    }
+
+    /* ─────────────────────────────────────
        RESPONSIVE — Mobile-first tuning
     ───────────────────────────────────── */
     /* 소형 모바일 (SE, 구형폰) */
@@ -1246,7 +1303,7 @@
       .verify-grid { grid-template-columns: 1fr; }
       .btn-primary, .btn-cta { font-size: 15px; padding: 15px 28px; }
       .check-item { font-size: 13.5px; padding: 14px 14px; }
-      .hero-logo-symbol { width: 120px; height: 120px; }
+      .hero-logo-symbol { max-width: 280px; border-radius: 16px; }
       .hero-brand-name { font-size: 24px; }
     }
 
@@ -1262,19 +1319,73 @@
       .h2 { font-size: 24px; }
     }
 
-    /* 태블릿 및 데스크톱 */
-    @media (min-width: 481px) {
-      .wrap { max-width: 520px; padding: 0 28px; }
-      .hero-logo-symbol { width: 180px; height: 180px; }
-      .hero-h1 { font-size: 34px; }
-      .h2 { font-size: 26px; }
+    /* ─────────────────────────────────────
+       데스크톱 — 완전 웹 UI
+    ───────────────────────────────────── */
+    @media (min-width: 768px) {
+      .wrap { max-width: 720px; padding: 0 32px; }
       .sec { padding: 80px 0; }
+
+      /* 히어로: 2컬럼 (좌 로고, 우 카피) */
+      .hero-content {
+        flex-direction: row;
+        align-items: center;
+        gap: 48px;
+        padding: 80px 32px;
+        max-width: 960px;
+      }
+      .hero-brand {
+        flex: 0 0 320px;
+        margin-bottom: 0;
+      }
+      .hero-logo-symbol {
+        max-width: 320px;
+        border-radius: 24px;
+      }
+      .hero-right {
+        flex: 1;
+        text-align: left;
+      }
+      .hero-right .hero-h1 { text-align: left; font-size: 36px; }
+      .hero-right .hero-sub { text-align: left; }
+      .hero-right .hero-usps { justify-content: flex-start; }
+      .hero-right .hero-cta-area { align-items: flex-start; text-align: left; }
+
+      /* 탭 네비: 항목이 여유 있게 */
+      .tab-btn { padding: 16px 24px; font-size: 14.5px; }
+
+      /* 2컬럼 그리드 강화 */
+      .diff-grid { grid-template-columns: 1fr 1fr; gap: 14px; }
+      .stat-grid { grid-template-columns: repeat(4, 1fr); gap: 14px; }
+      .verify-grid { grid-template-columns: 1fr 1fr; gap: 14px; }
+
+      /* CTA 영역 */
+      .cta-headline { font-size: 32px; }
+      .btn-cta { max-width: 400px; font-size: 18px; }
+
+      /* 푸터 */
+      .ft-inner { max-width: 720px; }
+    }
+
+    /* 와이드 데스크톱 */
+    @media (min-width: 1024px) {
+      .wrap { max-width: 860px; padding: 0 40px; }
+      .hero-content { max-width: 1080px; gap: 64px; }
+      .hero-brand { flex: 0 0 380px; }
+      .hero-logo-symbol { max-width: 380px; }
+      .tab-nav { max-width: 860px; }
+      .ft-inner { max-width: 860px; }
+
+      #hero { min-height: 100vh; justify-content: center; }
+
+      .hero-right .hero-h1 { font-size: 42px; }
+      .cta-headline { font-size: 36px; }
     }
 
     /* 가로 모드 대응 */
     @media (orientation: landscape) and (max-height: 500px) {
       #hero { min-height: auto; padding: 40px 0; }
-      .hero-logo-symbol { width: 80px; height: 80px; }
+      .hero-logo-symbol { max-width: 160px; }
       .hero-content { padding-bottom: 40px; }
     }
   </style>
@@ -1302,6 +1413,8 @@
 
     <div class="hero-brand-divider"></div>
 
+    <!-- 데스크톱: hero-right 래퍼 -->
+    <div class="hero-right">
     <h1 class="hero-h1" style="text-align:center;">
       소개팅은 부담스럽고,<br>앱은 지겹다면
     </h1>
@@ -1324,12 +1437,28 @@
       <span class="hero-micro">성비 1:1 보장 · 신청 후 개별 안내 · 정원 마감 시 조기 종료</span>
       <span class="naver-hint">네이버 간편 로그인으로 1분 신청</span>
     </div>
+    </div><!-- /hero-right -->
 
   </div>
 
   <div class="hero-scroll-hint" aria-hidden="true">SCROLL</div>
 </section>
 
+
+<!-- ══════════════════════════════════════
+     TAB NAVIGATION — 카테고리 UI
+══════════════════════════════════════ -->
+<nav class="tab-nav-wrap" id="tabNav" aria-label="콘텐츠 카테고리">
+  <div class="tab-nav">
+    <button class="tab-btn active" data-tab="tab-about" type="button">소개</button>
+    <button class="tab-btn" data-tab="tab-how" type="button">진행 방식</button>
+    <button class="tab-btn" data-tab="tab-info" type="button">참가 안내</button>
+    <button class="tab-btn" data-tab="tab-trust" type="button">운영 원칙</button>
+  </div>
+</nav>
+
+<!-- ── TAB 1: 소개 (Empathy + Intro + Diff) ── -->
+<div class="tab-panel active" id="tab-about">
 
 <!-- ══════════════════════════════════════
      S2 · EMPATHY
@@ -1474,6 +1603,10 @@
   </div>
 </section>
 
+</div><!-- /tab-about -->
+
+<!-- ── TAB 2: 진행 방식 (How + Mid-CTA + Atmo) ── -->
+<div class="tab-panel" id="tab-how">
 
 <!-- ══════════════════════════════════════
      S5 · HOW IT WORKS
@@ -1618,6 +1751,10 @@
   </div>
 </section>
 
+</div><!-- /tab-how -->
+
+<!-- ── TAB 3: 참가 안내 (Info) ── -->
+<div class="tab-panel" id="tab-info">
 
 <!-- ══════════════════════════════════════
      S7 · SESSION INFO
@@ -1691,6 +1828,10 @@
   </div>
 </section>
 
+</div><!-- /tab-info -->
+
+<!-- ── TAB 4: 운영 원칙 (Trust + FAQ) ── -->
+<div class="tab-panel" id="tab-trust">
 
 <!-- ══════════════════════════════════════
      S8 · TRUST
@@ -1866,6 +2007,7 @@
   </div>
 </section>
 
+</div><!-- /tab-trust -->
 
 <!-- ══════════════════════════════════════
      S10 · FINAL CTA
@@ -1940,8 +2082,17 @@
      JS — CONFIG + FAQ + STICKY
 ══════════════════════════════════════ -->
 <script>
+  /* ── 페이지 로드 시 항상 맨 위로 ── */
+  if ('scrollRestoration' in history) {
+    history.scrollRestoration = 'manual';
+  }
+  window.addEventListener('beforeunload', function () {
+    window.scrollTo(0, 0);
+  });
+  window.scrollTo(0, 0);
+
   /* ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-     ★ [추가] 운영값 CONFIG — 여기만 수정하면 전체 반영
+     ★ 운영값 CONFIG
      ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */
   const CONFIG = {
     NAVER_FORM_URL : 'https://form.naver.com/response/K3ryMyKyBwcO0rC3GW1nCQ',
@@ -2038,6 +2189,45 @@
       if (navigator.vibrate) navigator.vibrate(12);
     });
   });
+
+  /* ── 탭 내비게이션 ── */
+  (function () {
+    var btns = document.querySelectorAll('.tab-btn');
+    var panels = document.querySelectorAll('.tab-panel');
+    if (!btns.length) return;
+
+    btns.forEach(function (btn) {
+      btn.addEventListener('click', function () {
+        var target = btn.getAttribute('data-tab');
+
+        // 버튼 active 전환
+        btns.forEach(function (b) { b.classList.remove('active'); });
+        btn.classList.add('active');
+
+        // 패널 전환
+        panels.forEach(function (p) { p.classList.remove('active'); });
+        var panel = document.getElementById(target);
+        if (panel) panel.classList.add('active');
+
+        // 탭 영역 상단으로 스크롤
+        var nav = document.getElementById('tabNav');
+        if (nav) {
+          var top = nav.getBoundingClientRect().top + window.scrollY;
+          window.scrollTo({ top: top, behavior: 'smooth' });
+        }
+
+        // 새 탭 내 reveal 재실행
+        if (panel) {
+          panel.querySelectorAll('.reveal:not(.visible)').forEach(function (el) {
+            el.classList.add('visible');
+          });
+        }
+
+        // 햅틱
+        if (navigator.vibrate) navigator.vibrate(8);
+      });
+    });
+  })();
 </script>
 
 </body>
