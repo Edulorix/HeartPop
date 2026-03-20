@@ -1,0 +1,1500 @@
+
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+  <title>HeartPOP — 소개팅은 부담스럽고, 앱은 지겹다면</title>
+  <meta name="description" content="프라이빗 커튼룸에서 짧고 편안한 1:1 대화로 새로운 사람을 만나세요. 전원 만남 보장, 공개 발표 없음. 부천 로테이션 만남 이벤트." />
+  <meta property="og:title" content="HeartPOP — 어색하지 않은 첫 만남이 시작되는 곳" />
+  <meta property="og:description" content="프라이빗 커튼룸에서 짧고 편안한 1:1 대화로 새로운 사람을 만나세요." />
+  <meta property="og:type" content="website" />
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;700&family=Noto+Serif+KR:wght@400;600;700&display=swap" rel="stylesheet" />
+
+  <style>
+    /* ─────────────────────────────────────
+       RESET & TOKENS
+    ───────────────────────────────────── */
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --cream:        #FDFAF6;
+      --cream-mid:    #F6EFE5;
+      --cream-dark:   #EDE3D6;
+      --coral:        #E8695A;
+      --coral-dk:     #C74F40;
+      --coral-lt:     #F5A77F;
+      --gold:         #C9A96E;
+      --dark:         #1E1A18;
+      --dark-mid:     #2D2523;
+      --text:         #4A3F3A;
+      --text-lt:      #7A6B64;
+      --line:         #E6DDD4;
+      --white:        #FFFFFF;
+      --serif:        'Noto Serif KR', Georgia, serif;
+      --sans:         'Noto Sans KR', -apple-system, sans-serif;
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: var(--sans);
+      background: var(--cream);
+      color: var(--text);
+      line-height: 1.7;
+      overflow-x: hidden;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    /* ─────────────────────────────────────
+       LAYOUT HELPERS
+    ───────────────────────────────────── */
+    .wrap    { max-width: 480px; margin: 0 auto; padding: 0 24px; }
+    .sec     { padding: 72px 0; }
+    .sec-sm  { padding: 52px 0; }
+
+    .tag {
+      display: block;
+      font-size: 10.5px;
+      font-weight: 700;
+      letter-spacing: .18em;
+      text-transform: uppercase;
+      color: var(--coral);
+      margin-bottom: 14px;
+    }
+
+    .h2 {
+      font-family: var(--serif);
+      font-size: 24px;
+      line-height: 1.45;
+      color: var(--dark);
+      margin-bottom: 10px;
+    }
+    .h2.lt { color: var(--cream); }
+
+    .lead {
+      font-size: 14px;
+      color: var(--text-lt);
+      line-height: 1.8;
+    }
+    .lead.lt { color: rgba(253,250,246,.55); }
+
+    /* ─────────────────────────────────────
+       STICKY CTA (mobile bottom bar)
+    ───────────────────────────────────── */
+    #sticky {
+      position: fixed; bottom: 0; left: 0; right: 0; z-index: 200;
+      padding: 10px 20px calc(10px + env(safe-area-inset-bottom));
+      background: linear-gradient(to top, var(--cream) 75%, transparent);
+      pointer-events: none;
+      display: none;
+    }
+    #sticky a {
+      pointer-events: all;
+      display: block;
+      background: var(--coral);
+      color: #fff;
+      text-align: center;
+      padding: 15px;
+      border-radius: 12px;
+      font-size: 15px;
+      font-weight: 700;
+      text-decoration: none;
+      letter-spacing: .03em;
+      box-shadow: 0 4px 22px rgba(232,105,90,.4);
+    }
+    #sticky small {
+      display: block;
+      text-align: center;
+      font-size: 11px;
+      color: var(--text-lt);
+      margin-top: 5px;
+    }
+
+    /* ─────────────────────────────────────
+       S1 · HERO
+    ───────────────────────────────────── */
+    #hero {
+      min-height: 100svh;
+      background: var(--dark);
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-end;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .hero-bg {
+      position: absolute; inset: 0;
+      background:
+        radial-gradient(ellipse 80% 60% at 25% 65%, rgba(232,105,90,.18) 0%, transparent 65%),
+        radial-gradient(ellipse 60% 50% at 75% 25%, rgba(201,169,110,.10) 0%, transparent 55%),
+        #17120F;
+    }
+
+    /* subtle grain overlay */
+    .hero-bg::after {
+      content: '';
+      position: absolute; inset: 0;
+      opacity: .035;
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='300' height='300'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+      background-size: 300px 300px;
+    }
+
+    .hero-content {
+      position: relative; z-index: 2;
+      padding: 0 28px 110px;
+      max-width: 480px; margin: 0 auto; width: 100%;
+    }
+
+    .hero-logo {
+      display: block;
+      font-family: var(--serif);
+      font-size: 13px;
+      font-weight: 600;
+      letter-spacing: .22em;
+      color: rgba(255,255,255,.38);
+      margin-bottom: 56px;
+    }
+
+    .hero-eyebrow {
+      display: block;
+      font-size: 10.5px;
+      font-weight: 700;
+      letter-spacing: .18em;
+      text-transform: uppercase;
+      color: var(--coral-lt);
+      margin-bottom: 16px;
+    }
+
+    .hero-h1 {
+      font-family: var(--serif);
+      font-size: 32px;
+      font-weight: 700;
+      line-height: 1.4;
+      color: var(--cream);
+      margin-bottom: 20px;
+    }
+
+    .hero-sub {
+      font-size: 14.5px;
+      color: rgba(253,250,246,.60);
+      line-height: 1.75;
+      margin-bottom: 40px;
+    }
+
+    .btn-primary {
+      display: inline-block;
+      background: var(--coral);
+      color: #fff;
+      padding: 15px 32px;
+      border-radius: 10px;
+      font-size: 15px;
+      font-weight: 700;
+      text-decoration: none;
+      letter-spacing: .03em;
+      box-shadow: 0 5px 26px rgba(232,105,90,.50);
+      transition: background .2s, transform .1s;
+    }
+    .btn-primary:active { transform: scale(.97); background: var(--coral-dk); }
+
+    .hero-micro {
+      display: block;
+      margin-top: 12px;
+      font-size: 11.5px;
+      color: rgba(253,250,246,.35);
+    }
+
+    .hero-scroll-hint {
+      position: absolute; bottom: 36px; right: 28px; z-index: 2;
+      display: flex; flex-direction: column; align-items: center; gap: 6px;
+      color: rgba(255,255,255,.28);
+      font-size: 9.5px;
+      letter-spacing: .12em;
+    }
+    .hero-scroll-hint::before {
+      content: '';
+      display: block; width: 1px; height: 44px;
+      background: linear-gradient(to bottom, transparent, rgba(255,255,255,.28));
+    }
+
+    /* ─────────────────────────────────────
+       S2 · EMPATHY
+    ───────────────────────────────────── */
+    #empathy { background: var(--cream); }
+
+    .empathy-headline {
+      font-family: var(--serif);
+      font-size: 22px;
+      color: var(--dark);
+      line-height: 1.5;
+      margin-bottom: 28px;
+    }
+
+    .check-list {
+      list-style: none;
+      display: flex; flex-direction: column; gap: 10px;
+    }
+
+    .check-item {
+      display: flex; align-items: flex-start; gap: 12px;
+      background: var(--white);
+      border: 1px solid var(--line);
+      border-radius: 10px;
+      padding: 15px 17px;
+      font-size: 14px;
+      color: var(--text);
+      line-height: 1.6;
+    }
+
+    .check-dot {
+      flex-shrink: 0;
+      width: 20px; height: 20px;
+      border-radius: 50%;
+      background: var(--coral);
+      display: flex; align-items: center; justify-content: center;
+      margin-top: 1px;
+    }
+    .check-dot::after { content: '✓'; color: #fff; font-size: 11px; font-weight: 700; }
+
+    .empathy-footer {
+      margin-top: 28px;
+      padding: 24px 20px;
+      background: linear-gradient(135deg, #231E1B, #312A26);
+      border-radius: 14px;
+      text-align: center;
+    }
+    .empathy-footer p {
+      font-size: 15px;
+      color: rgba(253,250,246,.8);
+      line-height: 1.85;
+    }
+    .empathy-footer strong { color: var(--coral-lt); }
+
+    /* ─────────────────────────────────────
+       S3 · SERVICE INTRO (dark)
+    ───────────────────────────────────── */
+    #intro {
+      background: var(--dark-mid);
+      padding: 80px 0;
+    }
+
+    .intro-h2 {
+      font-family: var(--serif);
+      font-size: 26px;
+      color: var(--cream);
+      line-height: 1.45;
+      margin-bottom: 18px;
+    }
+
+    .intro-body {
+      font-size: 14.5px;
+      color: rgba(253,250,246,.60);
+      line-height: 1.85;
+      margin-bottom: 30px;
+    }
+    .intro-body strong { color: var(--coral-lt); }
+
+    .badges {
+      display: flex; flex-wrap: wrap; gap: 8px;
+    }
+
+    .badge {
+      padding: 7px 14px;
+      border: 1px solid rgba(232,105,90,.38);
+      border-radius: 100px;
+      font-size: 13px;
+      color: var(--coral-lt);
+    }
+
+    /* ─────────────────────────────────────
+       S4 · DIFFERENTIATORS
+    ───────────────────────────────────── */
+    #diff { background: var(--cream); }
+
+    .diff-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 10px;
+      margin-top: 28px;
+    }
+
+    .diff-card {
+      background: var(--white);
+      border: 1px solid var(--line);
+      border-radius: 14px;
+      padding: 20px 16px 18px;
+    }
+
+    .diff-icon { font-size: 22px; margin-bottom: 10px; }
+
+    .diff-title {
+      font-family: var(--serif);
+      font-size: 13.5px;
+      font-weight: 600;
+      color: var(--dark);
+      margin-bottom: 5px;
+      line-height: 1.4;
+    }
+
+    .diff-desc {
+      font-size: 12px;
+      color: var(--text-lt);
+      line-height: 1.6;
+    }
+
+    /* compare table */
+    .cmp-wrap {
+      margin-top: 32px;
+      border-radius: 14px;
+      overflow: hidden;
+      border: 1px solid var(--line);
+    }
+
+    .cmp-head {
+      display: grid;
+      grid-template-columns: 1.1fr 1fr 1fr;
+      background: var(--dark);
+    }
+    .cmp-head div {
+      padding: 11px 10px;
+      text-align: center;
+      font-size: 11px;
+      font-weight: 700;
+      color: rgba(253,250,246,.85);
+      letter-spacing: .06em;
+    }
+    .cmp-head div:last-child { color: var(--coral-lt); }
+
+    .cmp-row {
+      display: grid;
+      grid-template-columns: 1.1fr 1fr 1fr;
+      border-top: 1px solid var(--line);
+    }
+    .cmp-row:nth-child(odd) { background: var(--white); }
+    .cmp-row:nth-child(even) { background: var(--cream); }
+
+    .cmp-cell {
+      padding: 11px 10px;
+      font-size: 12px;
+      color: var(--text-lt);
+      text-align: center;
+      line-height: 1.5;
+      border-right: 1px solid var(--line);
+    }
+    .cmp-cell:last-child {
+      border-right: none;
+      color: var(--coral-dk);
+      font-weight: 500;
+    }
+    .cmp-cell:first-child {
+      font-weight: 500;
+      color: var(--text);
+      text-align: left;
+    }
+
+    /* ─────────────────────────────────────
+       S5 · HOW IT WORKS
+    ───────────────────────────────────── */
+    #how { background: var(--cream-mid); }
+
+    .tl {
+      margin-top: 32px;
+      position: relative;
+      padding-left: 30px;
+    }
+    .tl::before {
+      content: '';
+      position: absolute;
+      left: 10px; top: 20px; bottom: 20px;
+      width: 1px;
+      background: var(--line);
+    }
+
+    .tl-part-label {
+      display: inline-block;
+      font-size: 10px;
+      font-weight: 700;
+      letter-spacing: .12em;
+      text-transform: uppercase;
+      color: var(--coral);
+      background: rgba(232,105,90,.10);
+      padding: 3px 10px;
+      border-radius: 100px;
+      margin-bottom: 14px;
+      margin-left: -30px;
+    }
+
+    .tl-step { position: relative; margin-bottom: 24px; }
+
+    .tl-dot {
+      position: absolute;
+      left: -23px; top: 6px;
+      width: 10px; height: 10px;
+      border-radius: 50%;
+      background: var(--coral);
+      border: 2px solid var(--cream-mid);
+    }
+
+    .tl-time {
+      font-size: 11px;
+      font-weight: 700;
+      color: var(--coral);
+      letter-spacing: .06em;
+      margin-bottom: 2px;
+    }
+
+    .tl-name {
+      font-size: 15px;
+      font-weight: 700;
+      color: var(--dark);
+      margin-bottom: 3px;
+    }
+
+    .tl-desc {
+      font-size: 13px;
+      color: var(--text-lt);
+      line-height: 1.65;
+    }
+
+    .how-note {
+      margin-top: 24px;
+      padding: 17px 18px;
+      background: var(--white);
+      border: 1px solid var(--line);
+      border-radius: 12px;
+      font-size: 13px;
+      color: var(--text-lt);
+      line-height: 1.75;
+    }
+    .how-note strong { color: var(--dark); }
+
+    .btn-ghost {
+      display: inline-block;
+      margin-top: 28px;
+      padding: 12px 24px;
+      border: 1.5px solid var(--coral);
+      border-radius: 9px;
+      color: var(--coral);
+      font-size: 14px;
+      font-weight: 700;
+      text-decoration: none;
+      letter-spacing: .03em;
+    }
+
+    /* ─────────────────────────────────────
+       S6 · ATMOSPHERE (dark)
+    ───────────────────────────────────── */
+    #atmo {
+      background: #17120F;
+      padding: 72px 0 64px;
+    }
+
+    .atmo-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 8px;
+      margin-top: 28px;
+    }
+
+    .atmo-card {
+      border-radius: 12px;
+      overflow: hidden;
+    }
+    .atmo-card.tall { grid-row: span 2; }
+
+    .atmo-ph {
+      background: #2A211C;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      aspect-ratio: 1;
+    }
+    .atmo-card.tall .atmo-ph {
+      aspect-ratio: unset;
+      height: 100%;
+      min-height: 260px;
+    }
+
+    .atmo-ph-ico  { font-size: 26px; opacity: .45; }
+    .atmo-ph-txt  { font-size: 11px; color: rgba(253,250,246,.28); text-align: center; padding: 0 12px; line-height: 1.5; }
+
+    .atmo-caption {
+      margin-top: 22px;
+      text-align: center;
+      font-family: var(--serif);
+      font-size: 14px;
+      font-style: italic;
+      color: rgba(253,250,246,.42);
+    }
+
+    .atmo-note {
+      margin-top: 20px;
+      text-align: center;
+      font-size: 13px;
+      color: rgba(253,250,246,.45);
+      line-height: 1.75;
+    }
+
+    /* ─────────────────────────────────────
+       S7 · SESSION INFO
+    ───────────────────────────────────── */
+    #info { background: var(--cream); }
+
+    .info-card {
+      margin-top: 28px;
+      background: var(--white);
+      border: 1px solid var(--line);
+      border-radius: 16px;
+      overflow: hidden;
+    }
+
+    .info-card-head {
+      background: var(--dark);
+      padding: 20px 22px;
+    }
+    .info-card-title {
+      font-family: var(--serif);
+      font-size: 17px;
+      color: var(--cream);
+      margin-bottom: 3px;
+    }
+    .info-card-sub {
+      font-size: 12px;
+      color: rgba(253,250,246,.45);
+    }
+
+    .info-row {
+      display: flex;
+      align-items: flex-start;
+      gap: 14px;
+      padding: 14px 22px;
+      border-bottom: 1px solid var(--cream-mid);
+    }
+    .info-row:last-child { border-bottom: none; }
+
+    .info-lbl {
+      font-size: 12px;
+      color: var(--text-lt);
+      width: 72px;
+      flex-shrink: 0;
+      padding-top: 1px;
+    }
+
+    .info-val {
+      font-size: 14px;
+      font-weight: 500;
+      color: var(--dark);
+      line-height: 1.6;
+    }
+    .info-val .hl { color: var(--coral); font-weight: 700; }
+    .info-val small { font-size: 12px; color: var(--text-lt); font-weight: 400; display: block; }
+
+    /* price card */
+    .price-card {
+      margin-top: 12px;
+      background: var(--white);
+      border: 1px solid var(--line);
+      border-radius: 14px;
+      overflow: hidden;
+    }
+
+    .price-head {
+      padding: 14px 20px 8px;
+      font-size: 10.5px;
+      font-weight: 700;
+      letter-spacing: .12em;
+      text-transform: uppercase;
+      color: var(--text-lt);
+      border-bottom: 1px solid var(--cream-mid);
+    }
+
+    .price-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 13px 20px;
+      border-bottom: 1px solid var(--cream-mid);
+    }
+    .price-row:last-child { border-bottom: none; }
+
+    .price-nm { font-size: 14px; color: var(--text); }
+    .price-sub { font-size: 11.5px; color: var(--text-lt); margin-top: 1px; }
+    .price-amt { font-size: 16px; font-weight: 700; color: var(--dark); text-align: right; }
+
+    .notice {
+      margin-top: 14px;
+      padding: 13px 16px;
+      background: rgba(232,105,90,.07);
+      border-left: 3px solid var(--coral);
+      border-radius: 0 8px 8px 0;
+      font-size: 13px;
+      color: var(--text);
+      line-height: 1.75;
+    }
+
+    /* ─────────────────────────────────────
+       S8 · TRUST / GUARANTEE
+    ───────────────────────────────────── */
+    #trust { background: var(--cream-dark); }
+
+    .stat-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 10px;
+      margin-top: 26px;
+    }
+
+    .stat-card {
+      background: var(--white);
+      border: 1px solid var(--line);
+      border-radius: 14px;
+      padding: 20px 14px;
+      text-align: center;
+    }
+
+    .stat-num {
+      display: block;
+      font-family: var(--serif);
+      font-size: 28px;
+      font-weight: 600;
+      color: var(--coral);
+      margin-bottom: 4px;
+    }
+
+    .stat-lbl {
+      font-size: 12px;
+      color: var(--text-lt);
+      line-height: 1.5;
+    }
+
+    .promise-list {
+      margin-top: 24px;
+      display: flex; flex-direction: column; gap: 14px;
+    }
+
+    .promise-item {
+      display: flex; align-items: flex-start; gap: 14px;
+    }
+
+    .promise-ico {
+      width: 38px; height: 38px;
+      border-radius: 50%;
+      background: rgba(232,105,90,.10);
+      display: flex; align-items: center; justify-content: center;
+      font-size: 17px;
+      flex-shrink: 0;
+    }
+
+    .promise-txt strong {
+      display: block;
+      font-size: 14px;
+      color: var(--dark);
+      margin-bottom: 2px;
+    }
+    .promise-txt span {
+      font-size: 13px;
+      color: var(--text-lt);
+      line-height: 1.65;
+    }
+
+    /* ─────────────────────────────────────
+       S9 · FAQ
+    ───────────────────────────────────── */
+    #faq { background: var(--cream); }
+
+    .faq-list {
+      margin-top: 28px;
+      border: 1px solid var(--line);
+      border-radius: 14px;
+      overflow: hidden;
+    }
+
+    .faq-item { border-bottom: 1px solid var(--line); }
+    .faq-item:last-child { border-bottom: none; }
+
+    .faq-q {
+      width: 100%;
+      text-align: left;
+      padding: 17px 20px;
+      background: var(--white);
+      border: none;
+      cursor: pointer;
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      gap: 14px;
+      font-family: var(--sans);
+      font-size: 14px;
+      font-weight: 500;
+      color: var(--dark);
+      line-height: 1.5;
+      transition: background .15s;
+    }
+    .faq-q:hover  { background: var(--cream); }
+    .faq-q.open   { background: var(--cream-mid); }
+
+    .faq-arr {
+      flex-shrink: 0;
+      width: 20px; height: 20px;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 18px;
+      color: var(--text-lt);
+      transition: transform .25s, color .25s;
+      line-height: 1;
+    }
+    .faq-q.open .faq-arr { transform: rotate(45deg); color: var(--coral); }
+
+    .faq-a {
+      max-height: 0;
+      overflow: hidden;
+      transition: max-height .3s ease;
+      background: var(--cream-dark);
+    }
+    .faq-a.open { max-height: 400px; }
+
+    .faq-a-inner {
+      padding: 15px 20px 20px;
+      font-size: 13.5px;
+      color: var(--text);
+      line-height: 1.85;
+    }
+
+    /* ─────────────────────────────────────
+       S10 · FINAL CTA (dark)
+    ───────────────────────────────────── */
+    #cta {
+      background: var(--dark);
+      padding: 80px 0 140px;
+      text-align: center;
+    }
+
+    .cta-headline {
+      font-family: var(--serif);
+      font-size: 27px;
+      color: var(--cream);
+      line-height: 1.45;
+      margin-bottom: 12px;
+    }
+
+    .cta-sub {
+      font-size: 14px;
+      color: rgba(253,250,246,.50);
+      line-height: 1.8;
+      margin-bottom: 32px;
+    }
+
+    .cta-pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 7px;
+      background: rgba(232,105,90,.14);
+      border: 1px solid rgba(232,105,90,.30);
+      border-radius: 100px;
+      padding: 7px 16px;
+      font-size: 13px;
+      color: var(--coral-lt);
+      margin-bottom: 22px;
+    }
+    .cta-pill::before {
+      content: '●';
+      font-size: 7px;
+      animation: blink 1.6s infinite;
+    }
+    @keyframes blink { 0%,100%{opacity:1} 50%{opacity:.25} }
+
+    .btn-cta {
+      display: block;
+      width: 100%;
+      max-width: 340px;
+      margin: 0 auto 12px;
+      background: var(--coral);
+      color: #fff;
+      padding: 18px 32px;
+      border-radius: 12px;
+      font-size: 17px;
+      font-weight: 700;
+      text-decoration: none;
+      letter-spacing: .03em;
+      box-shadow: 0 6px 34px rgba(232,105,90,.48);
+      transition: background .2s, transform .1s;
+    }
+    .btn-cta:active { transform: scale(.97); }
+
+    .cta-micro {
+      font-size: 12px;
+      color: rgba(253,250,246,.30);
+    }
+
+    /* ─────────────────────────────────────
+       FOOTER
+    ───────────────────────────────────── */
+    footer {
+      background: #0D0B09;
+      padding: 40px 24px 80px;
+    }
+
+    .ft-inner { max-width: 480px; margin: 0 auto; }
+
+    .ft-brand {
+      font-family: var(--serif);
+      font-size: 15px;
+      font-weight: 600;
+      color: rgba(253,250,246,.75);
+      margin-bottom: 4px;
+    }
+
+    .ft-sub {
+      font-size: 12px;
+      color: rgba(253,250,246,.28);
+      margin-bottom: 24px;
+      line-height: 1.65;
+    }
+
+    .ft-links {
+      display: flex; flex-direction: column; gap: 10px;
+      margin-bottom: 28px;
+    }
+
+    .ft-link {
+      display: flex; align-items: center; gap: 10px;
+      color: rgba(253,250,246,.55);
+      text-decoration: none;
+      font-size: 13px;
+    }
+
+    .ft-ico {
+      width: 32px; height: 32px;
+      border-radius: 8px;
+      background: #1A1512;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 13px;
+    }
+
+    .ft-policy {
+      font-size: 11px;
+      color: rgba(253,250,246,.22);
+      line-height: 1.85;
+    }
+
+    /* ─────────────────────────────────────
+       RESPONSIVE
+    ───────────────────────────────────── */
+    @media (max-width: 360px) {
+      .hero-h1    { font-size: 27px; }
+      .diff-grid  { grid-template-columns: 1fr; }
+      .stat-grid  { grid-template-columns: 1fr 1fr; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- ══════════════════════════════════════
+     S1 · HERO
+══════════════════════════════════════ -->
+<section id="hero">
+  <div class="hero-bg"></div>
+
+  <div class="hero-content">
+    <span class="hero-logo">HEART POP ✦</span>
+    <span class="hero-eyebrow">Rotation Dating Event · 부천</span>
+
+    <h1 class="hero-h1">
+      소개팅은 부담스럽고,<br>앱은 지겹다면
+    </h1>
+
+    <p class="hero-sub">
+      커튼룸 프라이빗 공간에서,<br>
+      짧고 편안한 1:1 대화로<br>
+      새로운 사람을 만나세요.
+    </p>
+
+    <a href="#info" class="btn-primary">다음 세션 확인하기</a>
+    <span class="hero-micro">신청 약 1분 소요 · 성비 1:1 보장</span>
+  </div>
+
+  <div class="hero-scroll-hint">SCROLL</div>
+</section>
+
+
+<!-- ══════════════════════════════════════
+     S2 · EMPATHY
+══════════════════════════════════════ -->
+<section id="empathy" class="sec">
+  <div class="wrap">
+    <span class="tag">공감</span>
+    <h2 class="empathy-headline">
+      혹시 이런 생각,<br>해본 적 있나요?
+    </h2>
+
+    <ul class="check-list">
+      <li class="check-item">
+        <span class="check-dot"></span>
+        소개팅은 가고 싶은데, 1:1은 너무 부담스럽다
+      </li>
+      <li class="check-item">
+        <span class="check-dot"></span>
+        앱 매칭은 프로필만 보다가 지쳐버렸다
+      </li>
+      <li class="check-item">
+        <span class="check-dot"></span>
+        새로운 사람을 만나고 싶은데, 마땅한 계기가 없다
+      </li>
+      <li class="check-item">
+        <span class="check-dot"></span>
+        "소개팅 간다"고 말하기가 좀 그렇다
+      </li>
+    </ul>
+
+    <div class="empathy-footer">
+      <p>
+        그래서 만들었습니다.<br>
+        <strong>부담은 줄이고, 대화는 자연스럽게.</strong><br>
+        새로운 만남의 방식.
+      </p>
+    </div>
+  </div>
+</section>
+
+
+<!-- ══════════════════════════════════════
+     S3 · SERVICE INTRO
+══════════════════════════════════════ -->
+<section id="intro">
+  <div class="wrap">
+    <span class="tag" style="color: var(--coral-lt);">HeartPOP이란</span>
+
+    <h2 class="intro-h2">
+      만남의 방식을 바꾸면,<br>대화가 달라집니다
+    </h2>
+
+    <p class="intro-body">
+      HeartPOP은 보드게임카페의 프라이빗한 커튼룸에서 진행되는<br>
+      <strong>로테이션 기반 대화형 만남 이벤트</strong>입니다.<br><br>
+      모든 참가자와 짧고 편안한 1:1 대화를 나눈 뒤,<br>
+      더 이야기하고 싶은 사람과 자유롭게 교류하는 시간으로 이어집니다.
+    </p>
+
+    <div class="badges">
+      <span class="badge">프라이빗 공간</span>
+      <span class="badge">전원 1:1 대화</span>
+      <span class="badge">공개 발표 없음</span>
+      <span class="badge">부담 없는 분위기</span>
+    </div>
+  </div>
+</section>
+
+
+<!-- ══════════════════════════════════════
+     S4 · DIFFERENTIATORS
+══════════════════════════════════════ -->
+<section id="diff" class="sec">
+  <div class="wrap">
+    <span class="tag">차별점</span>
+    <h2 class="h2">기존 소개팅과는<br>확실히 다릅니다</h2>
+    <p class="lead" style="margin-bottom: 0;">시스템이 공정하게 설계되어 있기 때문입니다.</p>
+
+    <div class="diff-grid">
+      <div class="diff-card">
+        <div class="diff-icon">🔒</div>
+        <div class="diff-title">프라이빗 커튼룸</div>
+        <div class="diff-desc">주변 시선 걱정 없이, 대화에만 집중할 수 있는 공간</div>
+      </div>
+      <div class="diff-card">
+        <div class="diff-icon">🔄</div>
+        <div class="diff-title">전원 만남 구조</div>
+        <div class="diff-desc">참가자 전원과 1:1 대화 — 누구도 놓치지 않습니다</div>
+      </div>
+      <div class="diff-card">
+        <div class="diff-icon">🃏</div>
+        <div class="diff-title">질문카드 대화</div>
+        <div class="diff-desc">첫 마디가 어려울 때, 카드가 대화를 자연스럽게 열어줍니다</div>
+      </div>
+      <div class="diff-card">
+        <div class="diff-icon">🤫</div>
+        <div class="diff-title">조용한 매칭</div>
+        <div class="diff-desc">공개 발표 없음 — 설렘은 집에 가는 길에 시작됩니다</div>
+      </div>
+    </div>
+
+    <div class="cmp-wrap">
+      <div class="cmp-head">
+        <div style="text-align:left;">항목</div>
+        <div>일반 소개팅</div>
+        <div>HeartPOP ✦</div>
+      </div>
+      <div class="cmp-row">
+        <div class="cmp-cell">공간</div>
+        <div class="cmp-cell">카페 오픈석</div>
+        <div class="cmp-cell">커튼룸 프라이빗</div>
+      </div>
+      <div class="cmp-row">
+        <div class="cmp-cell">만남 방식</div>
+        <div class="cmp-cell">1명과만</div>
+        <div class="cmp-cell">전원 1:1 대화</div>
+      </div>
+      <div class="cmp-row">
+        <div class="cmp-cell">첫 대화</div>
+        <div class="cmp-cell">혼자 해결</div>
+        <div class="cmp-cell">질문카드 지원</div>
+      </div>
+      <div class="cmp-row">
+        <div class="cmp-cell">결과 발표</div>
+        <div class="cmp-cell">현장 공개</div>
+        <div class="cmp-cell">익일 개별 전달</div>
+      </div>
+      <div class="cmp-row">
+        <div class="cmp-cell">인기 쏠림</div>
+        <div class="cmp-cell">발생</div>
+        <div class="cmp-cell">시스템이 차단</div>
+      </div>
+      <div class="cmp-row">
+        <div class="cmp-cell">어색함 해소</div>
+        <div class="cmp-cell">본인 몫</div>
+        <div class="cmp-cell">운영 구조가 흡수</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<!-- ══════════════════════════════════════
+     S5 · HOW IT WORKS
+══════════════════════════════════════ -->
+<section id="how" class="sec">
+  <div class="wrap">
+    <span class="tag">진행 방식</span>
+    <h2 class="h2">이렇게 진행됩니다</h2>
+    <p class="lead">처음 오시는 분도 걱정 없이 즐기실 수 있습니다.</p>
+
+    <div class="tl">
+
+      <div style="margin-bottom:24px;">
+        <span class="tl-part-label">체크인</span>
+        <div class="tl-step">
+          <div class="tl-dot"></div>
+          <div class="tl-time">20:00</div>
+          <div class="tl-name">체크인 &amp; 음료 수령</div>
+          <div class="tl-desc">번호를 받고 자리에 앉습니다. 음료와 다과가 준비되어 있습니다.</div>
+        </div>
+      </div>
+
+      <div style="margin-bottom:24px;">
+        <span class="tl-part-label">1부 — 로테이션</span>
+        <div class="tl-step">
+          <div class="tl-dot"></div>
+          <div class="tl-time">20:20</div>
+          <div class="tl-name">아이스브레이킹</div>
+          <div class="tl-desc">가벼운 카드 게임으로 분위기를 자연스럽게 풉니다.</div>
+        </div>
+        <div class="tl-step">
+          <div class="tl-dot"></div>
+          <div class="tl-time">20:30</div>
+          <div class="tl-name">1:1 로테이션 대화</div>
+          <div class="tl-desc">6~7분씩, 참가자 전원과 1:1 대화. 테이블마다 질문카드가 놓여 있어 자연스럽게 이야기가 이어집니다.</div>
+        </div>
+      </div>
+
+      <div>
+        <span class="tl-part-label">2부 — 자유 교류</span>
+        <div class="tl-step">
+          <div class="tl-dot"></div>
+          <div class="tl-time">21:20</div>
+          <div class="tl-name">휴식 &amp; 관심 카드 작성</div>
+          <div class="tl-desc">음료를 마시며 쉬어갑니다. 결과는 현장에서 공개되지 않습니다.</div>
+        </div>
+        <div class="tl-step">
+          <div class="tl-dot"></div>
+          <div class="tl-time">21:30</div>
+          <div class="tl-name">자유 교류 &amp; 보드게임</div>
+          <div class="tl-desc">마음이 맞는 사람과 편안한 분위기에서 게임을 하며 대화를 이어갑니다.</div>
+        </div>
+        <div class="tl-step" style="margin-bottom:0;">
+          <div class="tl-dot"></div>
+          <div class="tl-time">22:30</div>
+          <div class="tl-name">마무리 &amp; 조용한 해산</div>
+          <div class="tl-desc">다시 만나고 싶은 사람을 조용히 선택합니다. 상호 선택 시, 다음날 개별 안내됩니다.</div>
+        </div>
+      </div>
+
+    </div>
+
+    <div class="how-note">
+      <strong>총 소요시간: 약 2시간 ~ 2시간 30분</strong><br>
+      운영자가 전체 흐름을 안내하므로, 처음이어도 걱정 없습니다.
+    </div>
+
+    <a href="#info" class="btn-ghost">세션 일정 · 가격 확인 →</a>
+  </div>
+</section>
+
+
+<!-- ══════════════════════════════════════
+     S6 · ATMOSPHERE
+══════════════════════════════════════ -->
+<section id="atmo">
+  <div class="wrap">
+    <span class="tag" style="color: var(--coral-lt);">분위기</span>
+    <h2 class="h2 lt">이런 분위기에서<br>진행됩니다</h2>
+    <p class="lead lt" style="margin-bottom:0;">
+      시끄러운 술자리가 아닙니다.<br>
+      편안하고 차분한 조명 아래, 오롯이 대화에 집중할 수 있습니다.
+    </p>
+
+    <div class="atmo-grid">
+      <div class="atmo-card tall">
+        <div class="atmo-ph">
+          <div class="atmo-ph-ico">🪔</div>
+          <div class="atmo-ph-txt">커튼룸 내부<br>무드등 조명</div>
+        </div>
+      </div>
+      <div class="atmo-card">
+        <div class="atmo-ph">
+          <div class="atmo-ph-ico">🃏</div>
+          <div class="atmo-ph-txt">질문카드<br>테이블 세팅</div>
+        </div>
+      </div>
+      <div class="atmo-card">
+        <div class="atmo-ph">
+          <div class="atmo-ph-ico">☕</div>
+          <div class="atmo-ph-txt">음료 &amp; 다과<br>세팅</div>
+        </div>
+      </div>
+    </div>
+
+    <p class="atmo-caption">"조용한 조명 아래, 자연스러운 대화가 시작되는 공간"</p>
+
+    <p class="atmo-note">
+      술잔 클로즈업도, 파티 조명도 없습니다.<br>
+      그냥 편안하게 앉아, 이야기하면 됩니다.
+    </p>
+  </div>
+</section>
+
+
+<!-- ══════════════════════════════════════
+     S7 · SESSION INFO
+══════════════════════════════════════ -->
+<section id="info" class="sec">
+  <div class="wrap">
+    <span class="tag">참가 안내</span>
+    <h2 class="h2">다음 세션 정보</h2>
+    <p class="lead">정원이 차면 마감됩니다. 일찍 신청하실수록 좋습니다.</p>
+
+    <div class="info-card">
+      <div class="info-card-head">
+        <div class="info-card-title">HeartPOP 정기 세션</div>
+        <div class="info-card-sub">부천 히어로 보드게임카페</div>
+      </div>
+      <div class="info-row">
+        <div class="info-lbl">📅 일시</div>
+        <div class="info-val"><span class="hl">매주 금요일</span> 저녁 8시</div>
+      </div>
+      <div class="info-row">
+        <div class="info-lbl">📍 장소</div>
+        <div class="info-val">
+          부천 히어로 보드게임카페
+          <small>신청 완료 시 상세 주소 안내</small>
+        </div>
+      </div>
+      <div class="info-row">
+        <div class="info-lbl">👥 인원</div>
+        <div class="info-val">남녀 각 <span class="hl">8명씩</span> (소수 정원제)</div>
+      </div>
+      <div class="info-row">
+        <div class="info-lbl">🎯 연령</div>
+        <div class="info-val">25 ~ 32세</div>
+      </div>
+      <div class="info-row">
+        <div class="info-lbl">✅ 포함</div>
+        <div class="info-val">음료 1잔, 소량 다과, 질문카드, 매칭 안내</div>
+      </div>
+    </div>
+
+    <div class="price-card">
+      <div class="price-head">참가비</div>
+      <div class="price-row">
+        <div>
+          <div class="price-nm">남성 참가비 (1부)</div>
+          <div class="price-sub">음료 + 다과 포함</div>
+        </div>
+        <div class="price-amt">49,000원</div>
+      </div>
+      <div class="price-row">
+        <div>
+          <div class="price-nm">여성 참가비 (1부)</div>
+          <div class="price-sub">음료 + 다과 포함</div>
+        </div>
+        <div class="price-amt">29,000원</div>
+      </div>
+      <div class="price-row">
+        <div>
+          <div class="price-nm">2부 자유교류 (선택)</div>
+          <div class="price-sub">보드게임 + 자유교류</div>
+        </div>
+        <div class="price-amt" style="font-size:14px;">+10,000<br>~15,000원</div>
+      </div>
+    </div>
+
+    <div class="notice">
+      성비는 <strong>1:1로 맞추어 운영</strong>됩니다.
+      인원이 충족되지 않으면 일정이 조정되며,
+      참가 확정 시 개별 안내 메시지를 드립니다.
+    </div>
+  </div>
+</section>
+
+
+<!-- ══════════════════════════════════════
+     S8 · TRUST
+══════════════════════════════════════ -->
+<section id="trust" class="sec">
+  <div class="wrap">
+    <span class="tag">운영 약속</span>
+    <h2 class="h2">HeartPOP이<br>지키는 약속들</h2>
+
+    <div class="stat-grid">
+      <div class="stat-card">
+        <span class="stat-num">1:1</span>
+        <div class="stat-lbl">성비 완벽 유지<br>미달 시 일정 조정</div>
+      </div>
+      <div class="stat-card">
+        <span class="stat-num">8명</span>
+        <div class="stat-lbl">소수 정원제<br>프라이빗 운영</div>
+      </div>
+      <div class="stat-card">
+        <span class="stat-num">전원</span>
+        <div class="stat-lbl">모든 참가자와<br>1:1 대화 보장</div>
+      </div>
+      <div class="stat-card">
+        <span class="stat-num">0건</span>
+        <div class="stat-lbl">현장 공개 매칭<br>발표 없음</div>
+      </div>
+    </div>
+
+    <div class="promise-list">
+      <div class="promise-item">
+        <div class="promise-ico">🔒</div>
+        <div class="promise-txt">
+          <strong>익명 기반 운영</strong>
+          <span>실명·직장 공개 강요 없음. 닉네임 사용 가능합니다.</span>
+        </div>
+      </div>
+      <div class="promise-item">
+        <div class="promise-ico">📩</div>
+        <div class="promise-txt">
+          <strong>조용한 매칭 안내</strong>
+          <span>상호 선택자에게만 익일 개별 연락처를 전달합니다.</span>
+        </div>
+      </div>
+      <div class="promise-item">
+        <div class="promise-ico">🎯</div>
+        <div class="promise-txt">
+          <strong>공정한 시스템</strong>
+          <span>인기 쏠림 없이, 시스템이 공정하게 모두와 연결합니다.</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<!-- ══════════════════════════════════════
+     S9 · FAQ
+══════════════════════════════════════ -->
+<section id="faq" class="sec">
+  <div class="wrap">
+    <span class="tag">FAQ</span>
+    <h2 class="h2">자주 묻는 질문</h2>
+
+    <div class="faq-list">
+
+      <div class="faq-item">
+        <button class="faq-q" onclick="faqToggle(this)">
+          혼자 가도 괜찮을까요?
+          <span class="faq-arr">+</span>
+        </button>
+        <div class="faq-a">
+          <div class="faq-a-inner">
+            네, 대부분의 참가자가 혼자 오십니다. 혼자 오시는 분들을 위한 구조이므로 편하게 오세요. 운영자가 자연스럽게 흐름을 이어가 드립니다.
+          </div>
+        </div>
+      </div>
+
+      <div class="faq-item">
+        <button class="faq-q" onclick="faqToggle(this)">
+          이름이나 나이를 꼭 공개해야 하나요?
+          <span class="faq-arr">+</span>
+        </button>
+        <div class="faq-a">
+          <div class="faq-a-inner">
+            강요하지 않습니다. 나이·직업·이름 공개 여부는 본인이 결정합니다. 불편하시면 닉네임을 쓰셔도 됩니다.
+          </div>
+        </div>
+      </div>
+
+      <div class="faq-item">
+        <button class="faq-q" onclick="faqToggle(this)">
+          매칭 결과는 어떻게 전달되나요?
+          <span class="faq-arr">+</span>
+        </button>
+        <div class="faq-a">
+          <div class="faq-a-inner">
+            현장에서 발표하지 않습니다. 이벤트 다음날, 상호 선택된 분들께만 개별 문자로 연락처를 전달해 드립니다.
+          </div>
+        </div>
+      </div>
+
+      <div class="faq-item">
+        <button class="faq-q" onclick="faqToggle(this)">
+          대화를 잘 못해도 괜찮을까요?
+          <span class="faq-arr">+</span>
+        </button>
+        <div class="faq-a">
+          <div class="faq-a-inner">
+            각 테이블에 질문카드가 놓여 있습니다. 첫 마디가 어려울 때 카드가 도와드립니다. "대화를 잘해야 한다"는 부담 없이 오세요.
+          </div>
+        </div>
+      </div>
+
+      <div class="faq-item">
+        <button class="faq-q" onclick="faqToggle(this)">
+          2부는 꼭 참여해야 하나요?
+          <span class="faq-arr">+</span>
+        </button>
+        <div class="faq-a">
+          <div class="faq-a-inner">
+            1부 후 귀가하셔도 됩니다. 2부 자유교류는 선택 사항이며 추가 참가비(10,000~15,000원)가 있습니다. 1부만으로도 충분히 의미 있는 시간이 됩니다.
+          </div>
+        </div>
+      </div>
+
+      <div class="faq-item">
+        <button class="faq-q" onclick="faqToggle(this)">
+          취소 및 환불은 어떻게 되나요?
+          <span class="faq-arr">+</span>
+        </button>
+        <div class="faq-a">
+          <div class="faq-a-inner">
+            이벤트 3일 전까지 전액 환불 가능합니다. 이후 취소는 부분 환불 또는 다음 세션 이월로 협의합니다. 변경 사항은 DM으로 문의해 주세요.
+          </div>
+        </div>
+      </div>
+
+      <div class="faq-item">
+        <button class="faq-q" onclick="faqToggle(this)">
+          음주는 필수인가요?
+          <span class="faq-arr">+</span>
+        </button>
+        <div class="faq-a">
+          <div class="faq-a-inner">
+            아닙니다. 기본 제공은 음료(논알콜 포함)입니다. 주류는 원하시는 분만 별도 주문하실 수 있으며, 음주를 강요하는 분위기는 없습니다.
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+
+<!-- ══════════════════════════════════════
+     S10 · FINAL CTA
+══════════════════════════════════════ -->
+<section id="cta">
+  <div class="wrap">
+    <span class="tag" style="color: var(--coral-lt);">신청하기</span>
+
+    <h2 class="cta-headline">
+      좋은 대화가<br>좋은 만남이 됩니다.<br>오늘 밤, 시작해보세요.
+    </h2>
+
+    <p class="cta-sub">
+      특별한 준비 없이도 괜찮습니다.<br>
+      그냥 와서, 자연스럽게 이야기하면 됩니다.
+    </p>
+
+    <div class="cta-pill">잔여석 확인 중 — 정원 8명</div>
+
+    <a href="https://forms.gle/" class="btn-cta" id="mainCta">지금 신청하기</a>
+    <p class="cta-micro">신청 완료까지 약 1분 · 성비 1:1 보장</p>
+  </div>
+</section>
+
+
+<!-- ══════════════════════════════════════
+     FOOTER
+══════════════════════════════════════ -->
+<footer>
+  <div class="ft-inner">
+    <div class="ft-brand">HeartPOP ✦</div>
+    <div class="ft-sub">
+      프라이빗 커튼룸 로테이션 만남 이벤트<br>
+      부천 히어로 보드게임카페
+    </div>
+
+    <div class="ft-links">
+      <a href="https://instagram.com/" class="ft-link">
+        <div class="ft-ico">📸</div>
+        인스타그램 @heartpop_official
+      </a>
+      <a href="https://open.kakao.com/" class="ft-link">
+        <div class="ft-ico">💬</div>
+        카카오 채널로 문의하기
+      </a>
+    </div>
+
+    <div class="ft-policy">
+      참가 신청은 만 19세 이상만 가능합니다.<br>
+      환불 정책 및 이벤트 진행 기준은 신청 완료 후 안내됩니다.<br>
+      문의: 인스타그램 DM 또는 카카오 채널
+    </div>
+  </div>
+</footer>
+
+
+<!-- ══════════════════════════════════════
+     STICKY CTA
+══════════════════════════════════════ -->
+<div id="sticky">
+  <a href="#cta">지금 신청하기</a>
+  <small>정원 8명 · 성비 1:1 보장</small>
+</div>
+
+
+<!-- ══════════════════════════════════════
+     JS
+══════════════════════════════════════ -->
+<script>
+  /* FAQ accordion */
+  function faqToggle(btn) {
+    const ans = btn.nextElementSibling;
+    const isOpen = ans.classList.contains('open');
+    document.querySelectorAll('.faq-a').forEach(a => a.classList.remove('open'));
+    document.querySelectorAll('.faq-q').forEach(b => b.classList.remove('open'));
+    if (!isOpen) { ans.classList.add('open'); btn.classList.add('open'); }
+  }
+
+  /* Sticky CTA visibility */
+  const sticky  = document.getElementById('sticky');
+  const heroEl  = document.getElementById('hero');
+  const ctaEl   = document.getElementById('cta');
+
+  const io = new IntersectionObserver(entries => {
+    entries.forEach(e => {
+      if (e.target === heroEl)  sticky.style.display = e.isIntersecting ? 'none' : 'block';
+      if (e.target === ctaEl)   sticky.style.display = e.isIntersecting ? 'none' : sticky.style.display;
+    });
+  }, { threshold: 0.15 });
+
+  io.observe(heroEl);
+  io.observe(ctaEl);
+</script>
+
+</body>
+</html>
