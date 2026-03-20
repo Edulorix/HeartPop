@@ -163,29 +163,14 @@
 
     .hero-content {
       position: relative; z-index: 2;
-      padding: 0 28px 110px;
+      padding: 0 28px 80px;
       max-width: 480px; margin: 0 auto; width: 100%;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
     }
 
-    .hero-logo {
-      display: block;
-      font-family: var(--serif);
-      font-size: 13px;
-      font-weight: 600;
-      letter-spacing: .22em;
-      color: rgba(255,255,255,.38);
-      margin-bottom: 56px;
-    }
-
-    .hero-eyebrow {
-      display: block;
-      font-size: 10.5px;
-      font-weight: 700;
-      letter-spacing: .18em;
-      text-transform: uppercase;
-      color: var(--coral-lt);
-      margin-bottom: 16px;
-    }
+    /* hero-logo/eyebrow는 hero-brand 영역으로 대체됨 */
 
     .hero-h1 {
       font-family: var(--serif);
@@ -899,10 +884,55 @@
       line-height: 1.85;
     }
 
-    /* ── [추가] Hero USP 3-pill ── */
+    /* ── [수정] 로고 심볼 히어로 ── */
+    .hero-brand {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+      margin-bottom: 36px;
+    }
+    .hero-logo-symbol {
+      width: 160px;
+      height: 160px;
+      border-radius: 50%;
+      object-fit: cover;
+      margin-bottom: 20px;
+      box-shadow:
+        0 0 0 4px rgba(232,105,90,.20),
+        0 0 60px rgba(232,105,90,.15),
+        0 8px 40px rgba(0,0,0,.40);
+      animation: logo-glow 4s ease-in-out infinite alternate;
+    }
+    @keyframes logo-glow {
+      0%   { box-shadow: 0 0 0 4px rgba(232,105,90,.20), 0 0 40px rgba(232,105,90,.10), 0 8px 40px rgba(0,0,0,.40); }
+      100% { box-shadow: 0 0 0 6px rgba(232,105,90,.30), 0 0 80px rgba(232,105,90,.18), 0 8px 40px rgba(0,0,0,.40); }
+    }
+    .hero-brand-name {
+      font-family: var(--serif);
+      font-size: 28px;
+      font-weight: 700;
+      letter-spacing: .08em;
+      color: var(--cream);
+      margin-bottom: 6px;
+    }
+    .hero-brand-tagline {
+      font-size: 13px;
+      letter-spacing: .15em;
+      color: rgba(253,250,246,.40);
+      font-weight: 400;
+    }
+    .hero-brand-divider {
+      width: 40px;
+      height: 1px;
+      background: linear-gradient(90deg, transparent, rgba(232,105,90,.5), transparent);
+      margin: 20px 0 24px;
+    }
+
     .hero-usps {
       display: flex; flex-wrap: wrap; gap: 8px;
-      margin-bottom: 24px;
+      justify-content: center;
+      margin-bottom: 20px;
     }
     .hero-usp {
       display: inline-flex; align-items: center; gap: 6px;
@@ -915,6 +945,32 @@
       backdrop-filter: blur(4px);
     }
     .hero-usp-ico { font-size: 14px; }
+
+    /* 히어로 하단 CTA 영역 중앙 정렬 */
+    .hero-cta-area {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+    }
+
+    /* 로고 반복 사용: 푸터/네비에서도 일관된 심볼 */
+    .ft-logo-symbol {
+      width: 48px;
+      height: 48px;
+      border-radius: 50%;
+      object-fit: cover;
+      margin-bottom: 12px;
+      box-shadow: 0 0 0 2px rgba(232,105,90,.15);
+    }
+
+    @media (max-width: 360px) {
+      .hero-logo-symbol { width: 120px; height: 120px; }
+      .hero-brand-name { font-size: 24px; }
+    }
+    @media (min-width: 481px) {
+      .hero-logo-symbol { width: 180px; height: 180px; }
+    }
 
     /* ── [추가] 중간 CTA 배너 ── */
     .mid-cta {
@@ -1016,13 +1072,7 @@
       outline-offset: 2px;
     }
 
-    /* ── [추가] 로고 이미지 ── */
-    .hero-logo-img {
-      height: 36px;
-      width: auto;
-      margin-bottom: 48px;
-      opacity: .85;
-    }
+    /* (로고 이미지: hero-brand 영역으로 이동) */
 
     /* ── [추가] 네이버 로그인 안내 ── */
     .naver-hint {
@@ -1052,35 +1102,44 @@
 <!-- ══════════════════════════════════════
      S1 · HERO
 ══════════════════════════════════════ -->
-<!-- ★ [수정] Hero: 로고 이미지 사용, USP 3-pill 즉시 노출, CTA→네이버폼 직링크, 마이크로카피 강화 -->
+<!-- ★ [수정] Hero: 로고 심볼을 화면 중앙에 크게 배치, 브랜드 각인형 히어로 -->
 <section id="hero">
   <div class="hero-bg"></div>
 
   <div class="hero-content">
-    <!-- 로고: 로고 폴더 내 이미지 사용 (가장 깔끔한 버전 선택) -->
-    <img src="로고/로고2.png" alt="HeartPOP 로고" class="hero-logo-img" />
-    <span class="hero-eyebrow">가까워진 사이 · Rotation Dating Event</span>
 
-    <h1 class="hero-h1">
+    <!-- ★ 로고 심볼 영역: 브랜드 각인 + 심볼화 (아이템 사업 확장 대비) -->
+    <div class="hero-brand">
+      <img src="로고/로고2.png" alt="HeartPOP 로고 심볼" class="hero-logo-symbol" />
+      <div class="hero-brand-name">HeartPOP</div>
+      <div class="hero-brand-tagline">가까워진 사이</div>
+    </div>
+
+    <div class="hero-brand-divider"></div>
+
+    <h1 class="hero-h1" style="text-align:center;">
       소개팅은 부담스럽고,<br>앱은 지겹다면
     </h1>
 
-    <!-- ★ [추가] 차별점 3가지 즉시 노출 -->
+    <!-- 차별점 3가지 즉시 노출 -->
     <div class="hero-usps">
       <span class="hero-usp"><span class="hero-usp-ico">🔒</span> 프라이빗 커튼룸</span>
       <span class="hero-usp"><span class="hero-usp-ico">🔄</span> 전원 1:1 대화</span>
       <span class="hero-usp"><span class="hero-usp-ico">🤫</span> 공개 발표 없음</span>
     </div>
 
-    <p class="hero-sub">
+    <p class="hero-sub" style="text-align:center;">
       커튼룸에서, 짧고 편안한 대화로<br>
       새로운 사람을 만나세요.
     </p>
 
-    <!-- ★ [수정] CTA: 네이버 폼 직접 연결, 즉시 신청 유도 -->
-    <a href="https://form.naver.com/response/K3ryMyKyBwcO0rC3GW1nCQ" class="btn-primary" target="_blank" rel="noopener noreferrer" aria-label="1분 만에 신청하기">1분 만에 신청하기</a>
-    <span class="hero-micro">성비 1:1 보장 · 신청 후 개별 안내 · 정원 마감 시 조기 종료</span>
-    <span class="naver-hint">네이버 로그인 후 신청 가능합니다</span>
+    <!-- CTA: 네이버 폼 직접 연결, 즉시 신청 유도 -->
+    <div class="hero-cta-area">
+      <a href="https://form.naver.com/response/K3ryMyKyBwcO0rC3GW1nCQ" class="btn-primary" target="_blank" rel="noopener noreferrer" aria-label="1분 만에 신청하기">1분 만에 신청하기</a>
+      <span class="hero-micro">성비 1:1 보장 · 신청 후 개별 안내 · 정원 마감 시 조기 종료</span>
+      <span class="naver-hint">네이버 로그인 후 신청 가능합니다</span>
+    </div>
+
   </div>
 
   <div class="hero-scroll-hint" aria-hidden="true">SCROLL</div>
@@ -1654,10 +1713,12 @@
 ══════════════════════════════════════ -->
 <footer>
   <div class="ft-inner">
-    <div class="ft-brand">HeartPOP ✦</div>
+    <!-- 푸터에서도 로고 심볼 반복: 브랜드 각인 강화 -->
+    <img src="로고/로고2.png" alt="HeartPOP" class="ft-logo-symbol" />
+    <div class="ft-brand">HeartPOP</div>
     <div class="ft-sub">
-      프라이빗 커튼룸 로테이션 만남 이벤트<br>
-      부천 히어로 보드게임카페
+      가까워진 사이<br>
+      프라이빗 커튼룸 로테이션 만남 이벤트 · 부천
     </div>
 
     <div class="ft-links">
