@@ -91,6 +91,17 @@
 
     /* 다크 모드 자동 전환 */
     @media (prefers-color-scheme: dark) {
+      @media (prefers-color-scheme: dark) {
+  .hero-h1, .hero-brand-name, .h2, .intro-h2 {
+    color: #F5F0EB !important;
+  }
+  .hero-sub, .intro-body, .lead {
+    color: #D4CBC4 !important;
+  }
+  .hero-logo-symbol {
+    box-shadow: 0 0 0 2px rgba(232,105,90,.20), 0 12px 48px rgba(0,0,0,.50), 0 0 100px rgba(232,105,90,.12);
+  }
+}
       :root {
         --cream:       #1A1714;
         --cream-mid:   #211D19;
@@ -216,14 +227,14 @@
       background-size: 300px 300px;
     }
 
-    .hero-content {
-      position: relative; z-index: 2;
-      padding: 0 24px calc(72px + env(safe-area-inset-bottom));
-      max-width: 480px; margin: 0 auto; width: 100%;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-    }
+.hero-content {
+  position: relative; z-index: 2;
+  padding: calc(env(safe-area-inset-top, 0px) + 24px) 24px calc(72px + env(safe-area-inset-bottom));
+  max-width: 480px; margin: 0 auto; width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
 
     /* hero-logo/eyebrow는 hero-brand 영역으로 대체됨 */
 
@@ -997,20 +1008,21 @@
       width: 100%;
       margin-bottom: 28px;
     }
-    .hero-logo-symbol {
-      width: 100%;
-      max-width: 360px;
-      height: auto;
-      aspect-ratio: 1 / 1;
-      border-radius: 20px;
-      object-fit: cover;
-      margin-bottom: 20px;
-      box-shadow:
-        0 0 0 1px rgba(232,105,90,.12),
-        0 12px 48px rgba(0,0,0,.50),
-        0 0 80px rgba(232,105,90,.08);
-      animation: logo-glow 4s ease-in-out infinite alternate;
-    }
+.hero-logo-symbol {
+  width: 100%;
+  max-width: 360px;
+  height: auto;
+  aspect-ratio: 1 / 1;
+  border-radius: 20px;
+  object-fit: cover;
+  margin-bottom: 20px;
+  margin-top: env(safe-area-inset-top, 0px); /* ← 이 줄 추가! */
+  box-shadow:
+    0 0 0 1px rgba(232,105,90,.12),
+    0 12px 48px rgba(0,0,0,.50),
+    0 0 80px rgba(232,105,90,.08);
+  animation: logo-glow 4s ease-in-out infinite alternate;
+}
     @keyframes logo-glow {
       0%   { box-shadow: 0 0 0 1px rgba(232,105,90,.12), 0 12px 48px rgba(0,0,0,.50), 0 0 60px rgba(232,105,90,.06); }
       100% { box-shadow: 0 0 0 2px rgba(232,105,90,.20), 0 12px 48px rgba(0,0,0,.50), 0 0 100px rgba(232,105,90,.12); }
@@ -1399,6 +1411,7 @@
   </style>
 </head>
 <body>
+  <button id="themeToggleBtn" style="position:fixed;top:12px;right:12px;z-index:999;background:rgba(253,250,246,.85);border:none;border-radius:8px;padding:8px 14px;font-size:13px;box-shadow:0 2px 8px rgba(0,0,0,.08);cursor:pointer;">🌗 테마 변경</button>
 
 <!-- 모바일 스크롤 진행률 바 -->
 <div class="scroll-progress" id="scrollBar"></div>
@@ -2090,6 +2103,23 @@
      JS — CONFIG + FAQ + STICKY
 ══════════════════════════════════════ -->
 <script>
+  // 테마 토글 기능
+const themeToggleBtn = document.getElementById('themeToggleBtn');
+if (themeToggleBtn) {
+  themeToggleBtn.addEventListener('click', function() {
+    const current = document.documentElement.getAttribute('data-theme');
+    const next = current === 'dark' ? 'light' : 'dark';
+    document.documentElement.setAttribute('data-theme', next);
+    localStorage.setItem('theme', next);
+    themeToggleBtn.textContent = next === 'dark' ? '🌞 라이트 모드' : '🌗 다크 모드';
+  });
+  // 초기 상태
+  const saved = localStorage.getItem('theme');
+  if (saved) {
+    document.documentElement.setAttribute('data-theme', saved);
+    themeToggleBtn.textContent = saved === 'dark' ? '🌞 라이트 모드' : '🌗 다크 모드';
+  }
+}
   /* ── 페이지 로드 시 항상 맨 위로 ── */
   if ('scrollRestoration' in history) {
     history.scrollRestoration = 'manual';
